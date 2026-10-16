@@ -1,0 +1,11 @@
+[info] Waiting for measurement data to sync...
+[info] Reading scoverage instrumentation [/Users/samy/AI-projects/pwc/dummy-projects/scala-sbt/target/scala-2.13/scoverage-data/scoverage.coverage]
+[info] Reading scoverage measurements...
+[info] Generating scoverage reports...
+[info] Written Cobertura report [/Users/samy/AI-projects/pwc/dummy-projects/scala-sbt/target/scala-2.13/coverage-report/cobertura.xml]
+[info] Written XML coverage report [/Users/samy/AI-projects/pwc/dummy-projects/scala-sbt/target/scala-2.13/scoverage-report/scoverage.xml]
+[info] Written HTML coverage report [/Users/samy/AI-projects/pwc/dummy-projects/scala-sbt/target/scala-2.13/scoverage-report/index.html]
+[info] Statement coverage.: 100.00%
+[info] Branch coverage....: 100.00%
+[info] Coverage reports completed
+[info] All done. Coverage was stmt=[100.00%] branch=[100.00%]

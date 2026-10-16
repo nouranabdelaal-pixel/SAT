@@ -1,0 +1,11 @@
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-xunit-test-fails/Calc/bin/Debug/net10.0/Calc.deps.json
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-xunit-test-fails/Calc/bin/Debug/net10.0/Calc.dll
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-xunit-test-fails/Calc/bin/Debug/net10.0/Calc.pdb
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-xunit-test-fails/Calc/obj/Debug/net10.0/Calc.GeneratedMSBuildEditorConfig.editorconfig
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-xunit-test-fails/Calc/obj/Debug/net10.0/Calc.AssemblyInfoInputs.cache
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-xunit-test-fails/Calc/obj/Debug/net10.0/Calc.AssemblyInfo.cs
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-xunit-test-fails/Calc/obj/Debug/net10.0/Calc.csproj.CoreCompileInputs.cache
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-xunit-test-fails/Calc/obj/Debug/net10.0/Calc.dll
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-xunit-test-fails/Calc/obj/Debug/net10.0/refint/Calc.dll
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-xunit-test-fails/Calc/obj/Debug/net10.0/Calc.pdb
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-xunit-test-fails/Calc/obj/Debug/net10.0/ref/Calc.dll

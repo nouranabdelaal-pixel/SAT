@@ -1,0 +1,34 @@
+# pre-llm.toml: optional settings for Pre-LLM Checks (only "ignore" and per-project commands).
+# The Python projects use plain "python -m unittest", so nothing needs installing.
+
+# Never scan the legacy folder (it holds a broken app on purpose).
+ignore = ["legacy"]
+
+# 1. No linter: only a tests command is set, so Lint shows WARN "no linter configured".
+[[project]]
+path = "shop-api"
+tests = "python -m unittest discover -s tests -v"
+
+# 2. Build gate: the build has a syntax error, so Lint/Tests/Coverage must be SKIP.
+[[project]]
+path = "broken-service"
+build = "python -m compileall -q src"
+lint = "python -c \"print('lint ran')\""
+tests = "python -m unittest discover -s src"
+
+# 3. A failing test (lint passes).
+[[project]]
+path = "failing-tests"
+lint = "python -m compileall -q ."
+tests = "python -m unittest discover -s tests -v"
+
+# 4. Linter set up but not installed: Lint shows WARN "tool not installed".
+[[project]]
+path = "tool-missing"
+lint = "notarealtool check ."
+tests = "python -m unittest discover -s tests"
+
+# 5. A test that takes 2 minutes: run with --timeout-tests 20s to see TIMEOUT.
+[[project]]
+path = "slow-tests"
+tests = "python -m unittest discover -s tests -v"

@@ -1,0 +1,7 @@
+{
+  "name": "flow-demo-root",
+  "scripts": {
+    "build": "node -e \"console.log('root build')\"",
+    "test": "node -e \"console.log('root tests')\""
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "schema_version": "1.0",
+  "summary": {
+    "status": "pass",
+    "project_count": 3,
+    "counts": {
+      "pass": 4,
+      "fail": 0,
+      "timeout": 0,
+      "warning": 4,
+      "skipped": 4,
+      "interrupted": 0
+    },
+    "generated_at": "2026-10-14T11:27:08+00:00"
+  },
+  "warnings": [
+    "gitignore_missing"
+  ],
+  "projects": [
+    {
+      "path": ".",
+      "language": "javascript",
+      "build_files": [
+        "package.json"
+      ],
+      "skipped_scripts": [],
+      "commands": [
+        {
+          "command": [
+            "npm",
+            "run",
+            "build"
+          ],
+          "scripts": null,
+          "source": "script:build",
+          "status": "pass",
+          "duration_s": 5.876664400000664,
+          "output_tail": [
+            "",
+            "> build",
+            "> node -e \"console.log('root build')\"",
+            "",
+            "root build"
+          ],
+          "log_path": ".pre-llm/logs/_root_/build-0.log",
+          "findings": null,
+          "stage": "build"
+        },
+        {
+          "command": null,
+          "scripts": null,
+          "source": null,
+          "status": "no_linter_configured",
+          "duration_s": 0.0,
+          "output_tail": [],
+          "log_path": null,
+          "findings": null,
+          "stage": "lint"
+        },
+        {
+          "command": [
+            "npm",
+            "run",
+            "test"
+          ],
+          "scripts": null,
+          "source": "script:test",
+          "status": "pass",
+          "duration_s": 3.9251444000001356,
+          "output_tail": [
+            "",
+            "> test",
+            "> node -e \"console.log('root tests')\"",
+            "",
+            "root tests"
+          ],
+          "log_path": ".pre-llm/logs/_root_/tests-0.log",
+          "findings": null,
+          "stage": "tests"
+        },
+        {
+          "command": null,
+          "scripts": null,
+          "source": null,
+          "status": "skipped",
+          "duration_s": 0.0,
+          "output_tail": [],
+          "log_path": null,
+          "findings": null,
+          "stage": "coverage",
+          "reason": "nothing_to_run"
+        }
+      ]
+    },
+    {
+      "path": "backend",
+      "language": "python",
+      "build_files": [
+        "backend/pyproject.toml"
+      ],
+      "skipped_scripts": [],
+      "commands": [
+        {
+          "command": null,
+          "scripts": null,
+          "source": null,
+          "status": "skipped",
+          "duration_s": 0.0,
+          "output_tail": [],
+          "log_path": null,
+          "findings": null,
+          "stage": "build",
+          "reason": "nothing_to_run"
+        },
+        {
+          "command": null,
+          "scripts": null,
+          "source": null,
+          "status": "no_linter_configured",
+          "duration_s": 0.0,
+          "output_tail": [],
+          "log_path": null,
+          "findings": null,
+          "stage": "lint"
+        },
+        {
+          "command": [
+            "pytest"
+          ],
+          "scripts": null,
+          "source": "config",
+          "status": "tool_not_installed",
+          "duration_s": 0.0,
+          "output_tail": [],
+          "log_path": ".pre-llm/logs/backend/tests-0.log",
+          "findings": null,
+          "stage": "tests"
+        },
+        {
+          "command": null,
+          "scripts": null,
+          "source": null,
+          "status": "skipped",
+          "duration_s": 0.0,
+          "output_tail": [],
+          "log_path": null,
+          "findings": null,
+          "stage": "coverage",
+          "reason": "nothing_to_run"
+        }
+      ],
+      "warnings": [
+        "tool_not_installed"
+      ]
+    },
+    {
+      "path": "frontend",
+      "language": "javascript",
+      "build_files": [
+        "frontend/package.json"
+      ],
+      "skipped_scripts": [],
+      "commands": [
+        {
+          "command": [
+            "npm",
+            "run",
+            "build"
+          ],
+          "scripts": null,
+          "source": "script:build",
+          "status": "pass",
+          "duration_s": 3.859313999999358,
+          "output_tail": [
+            "",
+            "> build",
+            "> node -e \"console.log('frontend build')\"",
+            "",
+            "frontend build"
+          ],
+          "log_path": ".pre-llm/logs/frontend/build-0.log",
+          "findings": null,
+          "stage": "build"
+        },
+        {
+          "command": null,
+          "scripts": null,
+          "source": null,
+          "status": "no_linter_configured",
+          "duration_s": 0.0,
+          "output_tail": [],
+          "log_path": null,
+          "findings": null,
+          "stage": "lint"
+        },
+        {
+          "command": [
+            "npm",
+            "run",
+            "test"
+          ],
+          "scripts": null,
+          "source": "script:test",
+          "status": "pass",
+          "duration_s": 4.013821500000631,
+          "output_tail": [
+            "",
+            "> test",
+            "> node -e \"console.log('frontend tests')\"",
+            "",
+            "frontend tests"
+          ],
+          "log_path": ".pre-llm/logs/frontend/tests-0.log",
+          "findings": null,
+          "stage": "tests"
+        },
+        {
+          "command": null,
+          "scripts": null,
+          "source": null,
+          "status": "skipped",
+          "duration_s": 0.0,
+          "output_tail": [],
+          "log_path": null,
+          "findings": null,
+          "stage": "coverage",
+          "reason": "nothing_to_run"
+        }
+      ]
+    }
+  ],
+  "environment": {
+    "os": "Windows 11",
+    "runners": {
+      "npm": "11.19.1",
+      "pytest": "unknown"
+    }
+  }
+}

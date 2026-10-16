@@ -1,0 +1,40 @@
+SAT demo projects - expected results (master after Sessions 22 and 23)
+Columns: Build  Lint  Tests  Coverage  -> exit code
+Every run also shows the warning: (repo): gitignore_missing
+
+01-python-all-pass     SKIP  PASS  PASS  100.0%  -> 0
+02-python-lint-fail    SKIP  FAIL  SKIP  SKIP    -> 1
+03-python-test-fail    SKIP  PASS  FAIL  SKIP    -> 1
+04-python-no-linter    SKIP  WARN  PASS  100.0%  -> 0
+05-python-no-tests     SKIP  PASS  SKIP  FAIL    -> 1   (Details: . / coverage: FAIL  no tests found)
+06-js-all-pass         PASS  PASS  PASS  100.0%  -> 0
+07-js-build-fail       FAIL  SKIP  SKIP  SKIP    -> 1
+08-js-lint-fail        PASS  FAIL  SKIP  SKIP    -> 1
+09-js-missing-deps     SKIP  SKIP  SKIP  SKIP    -> 0   (warning: dependencies_missing)
+10-java-all-pass       PASS  PASS  PASS  100.0%  -> 0
+11-java-build-fail     FAIL  SKIP  SKIP  SKIP    -> 1
+12-java-test-fail      PASS  PASS  FAIL  SKIP    -> 1
+13-go-all-pass         PASS  PASS  PASS  85.7%   -> 0
+14-go-test-fail        PASS  PASS  FAIL  SKIP    -> 1
+
+15-monorepo                                      -> 0
+  backend (python)           SKIP  PASS  PASS  100.0%
+  frontend (javascript)      SKIP  PASS  PASS  100.0%
+  services/billing (java)    PASS  WARN  PASS  100.0%
+  warnings: tools: no_project, analysis: unsupported_extension
+
+16-edge-cases (run with --timeout-tests 20s)     -> 1
+  broken-service             FAIL  SKIP  SKIP     SKIP
+  failing-tests              SKIP  PASS  FAIL     SKIP
+  needs-deps                 SKIP  SKIP  SKIP     SKIP
+  shop-api                   SKIP  WARN  PASS     SKIP
+  slow-tests                 SKIP  WARN  TIMEOUT  SKIP
+  tool-missing               SKIP  WARN  PASS     SKIP
+  web                        PASS  FAIL  SKIP     SKIP
+
+17-no-project          no table: "No supported projects found."  -> 3
+18-kotlin-all-pass     PASS  PASS  PASS  100.0%  -> 0
+19-kotlin-lint-fail    PASS  FAIL  SKIP  SKIP    -> 1
+20-kotlin-test-fail    PASS  PASS  FAIL  SKIP    -> 1
+
+If a JS project shows all SKIP with dependencies_missing: run npm install in it first (not in 09 or 16/needs-deps).

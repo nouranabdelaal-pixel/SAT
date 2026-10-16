@@ -1,0 +1,1 @@
+{application,x,[{modules,['Elixir.X']},{optional_applications,[]},{applications,[kernel,stdlib,elixir]},{description,"x"},{registered,[]},{vsn,"0.1.0"}]}.

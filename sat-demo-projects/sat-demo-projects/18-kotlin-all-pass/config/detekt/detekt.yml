@@ -1,0 +1,4 @@
+# Extra rules on top of detekt's defaults.
+style:
+  MagicNumber:
+    active: false

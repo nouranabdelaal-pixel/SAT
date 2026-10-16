@@ -1,0 +1,119 @@
+{
+  "simplecov_history": {
+    "format_version": 1,
+    "entries": [
+      {
+        "created_at": "2026-10-13T00:23:36Z",
+        "branch": null,
+        "commit": null,
+        "totals": {
+          "line": 50.0
+        },
+        "groups": {},
+        "files": {
+          "lib/app.rb": {
+            "line": 50.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-10-13T00:23:36Z",
+        "branch": null,
+        "commit": null,
+        "totals": {
+          "line": 100.0
+        },
+        "groups": {},
+        "files": {
+          "lib/app.rb": {
+            "line": 100.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-10-13T00:23:39Z",
+        "branch": null,
+        "commit": null,
+        "totals": {
+          "line": 50.0
+        },
+        "groups": {},
+        "files": {
+          "lib/app.rb": {
+            "line": 50.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-10-13T00:23:40Z",
+        "branch": null,
+        "commit": null,
+        "totals": {
+          "line": 100.0
+        },
+        "groups": {},
+        "files": {
+          "lib/app.rb": {
+            "line": 100.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-10-13T00:50:16Z",
+        "branch": null,
+        "commit": null,
+        "totals": {
+          "line": 50.0
+        },
+        "groups": {},
+        "files": {
+          "lib/app.rb": {
+            "line": 50.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-10-13T00:50:17Z",
+        "branch": null,
+        "commit": null,
+        "totals": {
+          "line": 100.0
+        },
+        "groups": {},
+        "files": {
+          "lib/app.rb": {
+            "line": 100.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-10-13T00:50:19Z",
+        "branch": null,
+        "commit": null,
+        "totals": {
+          "line": 50.0
+        },
+        "groups": {},
+        "files": {
+          "lib/app.rb": {
+            "line": 50.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-10-13T00:50:19Z",
+        "branch": null,
+        "commit": null,
+        "totals": {
+          "line": 100.0
+        },
+        "groups": {},
+        "files": {
+          "lib/app.rb": {
+            "line": 100.0
+          }
+        }
+      }
+    ]
+  }
+}

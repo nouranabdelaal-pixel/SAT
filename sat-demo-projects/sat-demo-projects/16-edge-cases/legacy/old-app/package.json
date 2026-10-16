@@ -1,0 +1,5 @@
+{
+  "name": "old-app",
+  "private": true,
+  "scripts": { "build": "node -e \"process.exit(1)\"" }
+}

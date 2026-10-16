@@ -1,0 +1,723 @@
+# languages.toml — the rulebook for Pre-LLM Checks.
+# Adding a language = adding an entry here, not changing code.
+# tested = false until all applicable fixtures pass (see CONTEXT.md).
+
+[language.python]
+extensions        = [".py"]
+build_files       = ["pyproject.toml", "requirements.txt"]
+build_priority    = ["pyproject.toml", "requirements.txt"]
+dep_folders       = []
+dep_error_phrases = ["ModuleNotFoundError", "No module named", "unrecognized arguments: --cov"]
+stages            = ["build", "lint", "tests", "coverage"]
+coverage_files    = ["coverage.xml", ".coverage"]
+# pytest exits 5 with "no tests ran" when it collects nothing; unittest prints
+# "Ran 0 tests".  That run is Tests SKIP (no_tests_found), not FAIL.
+no_tests_patterns      = ['''^Ran 0 tests in ''']
+no_tests_fail_patterns = ['''no tests ran in [\d.]+m?s''', '''^Ran 0 tests in ''']
+tests_ran_patterns     = ['''\b[1-9]\d* (passed|failed)\b''', '''^Ran [1-9]\d* tests? in ''']
+# Promoted after Session 10: every applicable python-* fixture passed.
+tested            = true
+
+# stage_names: script name fragments that map to each stage.
+# Keys are stage names; values are lists of accepted prefixes/exact names.
+[language.python.stage_names]
+build    = ["build"]
+lint     = ["lint", "check", "flake8", "ruff", "mypy", "pylint"]
+tests    = ["test", "tests", "pytest"]
+coverage = ["coverage", "cov"]
+
+# Python declares its tools through config_commands below.
+
+# builtin_phases: commands that are always available for the build system,
+# require no script, no config, just the build tool.
+[language.python.builtin_phases]
+build    = []
+lint     = []
+tests    = []
+coverage = []
+
+# config_commands: the tool is run only when the project itself declares it,
+# either as a config file next to the build file ("files"), as a table in
+# pyproject.toml ("pyproject_tables"), or as a section in an INI-style file
+# next to the build file ("ini_sections": [[file name, section name], ...],
+# e.g. [tool:pytest] in setup.cfg).  A dev-dependency alone never counts.
+# Python has no build stage command (build = n/a).
+[[language.python.config_commands]]
+stage            = "tests"
+files            = ["pytest.ini"]
+pyproject_tables = ["tool.pytest"]
+ini_sections     = [["setup.cfg", "tool:pytest"], ["tox.ini", "pytest"]]
+command          = "pytest"
+
+[[language.python.config_commands]]
+stage            = "lint"
+files            = ["ruff.toml", ".ruff.toml"]
+pyproject_tables = ["tool.ruff"]
+command          = "ruff check ."
+
+[[language.python.config_commands]]
+stage            = "lint"
+files            = [".flake8"]
+ini_sections     = [["setup.cfg", "flake8"], ["tox.ini", "flake8"]]
+command          = "flake8 ."
+
+[[language.python.config_commands]]
+stage            = "lint"
+files            = [".pylintrc"]
+pyproject_tables = ["tool.pylint"]
+command          = "pylint --recursive=y ."
+
+[[language.python.config_commands]]
+stage            = "lint"
+files            = ["mypy.ini"]
+pyproject_tables = ["tool.mypy"]
+ini_sections     = [["setup.cfg", "mypy"]]
+command          = "mypy ."
+
+# Coverage already turned on in pytest's own addopts (e.g. --cov=calc): the
+# project chose what to measure, so only add the XML report.  A bare --cov
+# would also measure the test files and give a different number.
+# exclusive: the [tool.coverage] rule below must not add a second pytest run.
+[[language.python.config_commands]]
+stage                = "coverage"
+addopts_contains     = ["--cov"]
+addopts_not_contains = ["--no-cov"]
+exclusive            = true
+command              = "pytest --cov-report=xml"
+
+[[language.python.config_commands]]
+stage            = "coverage"
+files            = [".coveragerc"]
+pyproject_tables = ["tool.coverage"]
+ini_sections     = [["setup.cfg", "coverage:run"], ["tox.ini", "coverage:run"]]
+command          = "pytest --cov --cov-report=xml"
+
+
+[language.javascript]
+# Covers both JS and TypeScript projects (keyed as "javascript").
+extensions        = [".js", ".ts", ".jsx", ".tsx", ".mjs", ".cjs"]
+build_files       = ["package.json"]
+build_priority    = ["package.json"]
+dep_folders       = ["node_modules"]
+# The node_modules check applies only when package.json declares packages in
+# one of these keys.  A project with no dependencies never gets node_modules.
+dep_declared_keys = ["dependencies", "devDependencies", "optionalDependencies",
+                     "peerDependencies"]
+# "npm ERR!" / "npm error" are deliberately absent: npm prints them for ANY
+# failing script, which would turn a real test/lint failure into
+# dependencies_missing.  "MODULE_NOT_FOUND" is absent too: Node prints it for a
+# mistyped relative require ('./calcx'), which is a code bug.
+dep_error_phrases = ["command not found",
+                     "is not recognized as an internal or external command",
+                     "npx canceled due to missing packages",
+                     "Cannot find package '"]
+# Regular expressions (Python re, multiline).  A missing *package* only: the
+# module name does not start with . / \ a drive letter, @/ or ~/ (those are
+# the project's own files or path aliases, so a miss there is a code bug).
+# The second one is the Linux /bin/sh (dash) "tool not found" line.
+dep_error_patterns = [
+    '''Cannot find module '(?![A-Za-z]:[\\/]|@/|~/)[^'./\\]''',
+    '''^sh: \d+: \S+: not found''',
+]
+stages            = ["build", "lint", "tests", "coverage"]
+coverage_files    = ["coverage/coverage-summary.json", "coverage/lcov.info"]
+# Promoted after Session 11: every applicable js-* fixture passed.
+tested            = true
+
+[language.javascript.stage_names]
+build    = ["build", "compile", "tsc", "typecheck", "type-check"]
+lint     = ["lint", "check", "eslint", "tslint", "biome", "oxlint"]
+tests    = ["test", "tests", "jest", "vitest", "mocha", "jasmine"]
+coverage = ["coverage", "cov"]
+
+[language.javascript.builtin_phases]
+build    = []
+lint     = []
+tests    = []
+coverage = []
+
+
+# config_commands: run only when the project declares the tool with a config file
+# next to package.json ("files") or with a top-level key in package.json
+# ("package_json_keys", e.g. "jest").  Run through `npx --no-install` so nothing
+# is downloaded.
+[[language.javascript.config_commands]]
+stage   = "build"
+files   = ["tsconfig.json"]
+command = "npx --no-install tsc --noEmit"
+
+[[language.javascript.config_commands]]
+stage   = "lint"
+files   = [".eslintrc", ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json",
+           ".eslintrc.yaml", ".eslintrc.yml", "eslint.config.js",
+           "eslint.config.mjs", "eslint.config.cjs", "eslint.config.ts",
+           "eslint.config.mts", "eslint.config.cts"]
+command = "npx --no-install eslint ."
+
+[[language.javascript.config_commands]]
+stage   = "lint"
+files   = ["biome.json", ".biome.json", "biome.jsonc"]
+command = "npx --no-install biome check ."
+
+[[language.javascript.config_commands]]
+stage   = "tests"
+files   = ["jest.config.js", "jest.config.ts", "jest.config.mjs",
+           "jest.config.cjs", "jest.config.cts", "jest.config.json"]
+package_json_keys = ["jest"]
+command = "npx --no-install jest"
+
+[[language.javascript.config_commands]]
+stage   = "tests"
+files   = ["vitest.config.js", "vitest.config.ts", "vitest.config.mjs",
+           "vitest.config.mts", "vitest.config.cjs", "vitest.config.cts"]
+command = "npx --no-install vitest run"
+
+[[language.javascript.config_commands]]
+stage   = "tests"
+files   = [".mocharc.js", ".mocharc.cjs", ".mocharc.yaml", ".mocharc.yml",
+           ".mocharc.json", ".mocharc.jsonc"]
+package_json_keys = ["mocha"]
+command = "npx --no-install mocha"
+
+[[language.javascript.config_commands]]
+stage   = "coverage"
+files   = ["jest.config.js", "jest.config.ts", "jest.config.mjs",
+           "jest.config.cjs", "jest.config.cts", "jest.config.json"]
+package_json_keys = ["jest"]
+command = "npx --no-install jest --coverage --coverageReporters=json-summary"
+
+[language.java]
+extensions        = [".java"]
+build_files       = ["pom.xml", "build.gradle", "build.gradle.kts"]
+build_priority    = ["pom.xml", "build.gradle", "build.gradle.kts"]
+dep_folders       = []
+dep_error_phrases = ["Could not resolve dependencies", "Could not resolve artifact", "Could not resolve all dependencies", "Could not resolve all files", "Could not resolve all artifacts"]
+stages            = ["build", "lint", "tests", "coverage"]
+# Maven jacoco:report, Gradle jacocoTestReport.  Gradle writes the XML only
+# when the build file enables it (reports { xml.required = true }).
+coverage_files    = ["target/site/jacoco/jacoco.xml",
+                     "build/reports/jacoco/test/jacocoTestReport.xml"]
+# A tests command that passed but ran no test shows SKIP (no_tests_found), not
+# PASS: a no_tests pattern matches the full log and no tests_ran pattern does
+# (Python re, multiline).  Maven: "No tests to run." without "Tests run: N".
+# Gradle: a test task that was NO-SOURCE and none that executed.
+no_tests_patterns  = ['''No tests to run\.''', '''^> Task \S*:test NO-SOURCE''']
+tests_ran_patterns = ['''Tests run: [1-9]''', '''^> Task \S*:test( UP-TO-DATE| FROM-CACHE)?\s*$''']
+# Promoted after Session 12: every applicable java-* fixture passed.
+tested            = true
+
+# subproject_rules: a Maven module (listed in a parent pom.xml <module>) or a
+# Gradle subproject (below a folder with settings.gradle[.kts]) is built by
+# that root build, so it is part of the root project, not a project of its
+# own.  Key = the root's primary build file.
+[language.java.subproject_rules]
+"pom.xml"          = "maven_modules"
+"build.gradle"     = "gradle_settings"
+"build.gradle.kts" = "gradle_settings"
+
+# build_tools: which command prefixes belong to which build file.  A pom.xml
+# project only gets mvn/mvnw commands, a Gradle project only gradle/gradlew.
+[language.java.build_tools]
+"pom.xml"          = ["mvn"]
+"build.gradle"     = ["gradle"]
+"build.gradle.kts" = ["gradle"]
+
+# Maven and Gradle have built-in lifecycle phases for build and tests only.
+# Lint and coverage are NOT built-in: they run only when the build file
+# declares the plugin (see config_commands below), so a bare project reports
+# no_linter_configured instead of failing on a plugin it never declared.
+[language.java.builtin_phases]
+# Gradle "build" also runs test and check, so a failing test or lint would
+# show as a Build failure and the build gate would hide it.  "assemble"
+# compiles and packages only, like "mvn compile".  The runner swaps in
+# mvnw / gradlew when the project has one.
+build    = ["mvn compile", "gradle assemble"]
+lint     = []
+tests    = ["mvn test", "gradle test"]
+coverage = []
+
+# config_commands: the tool runs when the build file declares its plugin
+# (build_file_contains; comments in the build file are ignored).  A lone
+# checkstyle.xml / pmd.xml does not count: Maven ignores it unless the plugin
+# in pom.xml points to it, and would check with its own default rules.
+# Maven rules apply to pom.xml only, Gradle rules to the Gradle build files.
+[[language.java.config_commands]]
+stage               = "lint"
+build_files         = ["pom.xml"]
+build_file_contains = ["maven-checkstyle-plugin"]
+command             = "mvn checkstyle:check"
+
+[[language.java.config_commands]]
+stage               = "lint"
+build_files         = ["pom.xml"]
+build_file_contains = ["maven-pmd-plugin"]
+command             = "mvn pmd:check"
+
+[[language.java.config_commands]]
+stage               = "lint"
+build_files         = ["pom.xml"]
+build_file_contains = ["spotbugs-maven-plugin"]
+command             = "mvn spotbugs:check"
+
+[[language.java.config_commands]]
+stage               = "coverage"
+build_files         = ["pom.xml"]
+build_file_contains = ["jacoco-maven-plugin"]
+command             = "mvn jacoco:report"
+
+[[language.java.config_commands]]
+stage               = "lint"
+build_files         = ["build.gradle", "build.gradle.kts"]
+build_file_contains = ["checkstyle"]
+command             = "gradle checkstyleMain"
+
+[[language.java.config_commands]]
+stage               = "lint"
+build_files         = ["build.gradle", "build.gradle.kts"]
+build_file_contains = ["pmd"]
+command             = "gradle pmdMain"
+
+[[language.java.config_commands]]
+stage               = "lint"
+build_files         = ["build.gradle", "build.gradle.kts"]
+build_file_contains = ["spotbugs"]
+command             = "gradle spotbugsMain"
+
+[[language.java.config_commands]]
+stage               = "coverage"
+build_files         = ["build.gradle", "build.gradle.kts"]
+build_file_contains = ["jacoco"]
+command             = "gradle jacocoTestReport"
+
+
+[language.kotlin]
+extensions        = [".kt", ".kts"]
+build_files       = ["build.gradle", "build.gradle.kts"]
+build_priority    = ["build.gradle.kts", "build.gradle"]
+dep_folders       = []
+dep_error_phrases = ["Could not resolve dependencies", "Could not resolve artifact", "Could not resolve all dependencies", "Could not resolve all files", "Could not resolve all artifacts"]
+stages            = ["build", "lint", "tests", "coverage"]
+# Gradle jacocoTestReport writes the XML only when the build file enables it
+# (reports { xml.required = true }).
+coverage_files    = ["build/reports/jacoco/test/jacocoTestReport.xml"]
+# A tests command that passed but ran no test shows SKIP (no_tests_found), not
+# PASS (same Gradle patterns as Java): a test task that was NO-SOURCE and none
+# that executed.
+no_tests_patterns  = ['''^> Task \S*:test NO-SOURCE''']
+tests_ran_patterns = ['''^> Task \S*:test( UP-TO-DATE| FROM-CACHE)?\s*$''']
+# Promoted after Session 14: every kotlin-* check passed with real Gradle.
+tested            = true
+
+# subproject_rules: a Gradle subproject (below a folder with
+# settings.gradle[.kts]) is built by that root build, so it is part of the
+# root project, not a project of its own (same as Java).
+[language.kotlin.subproject_rules]
+"build.gradle"     = "gradle_settings"
+"build.gradle.kts" = "gradle_settings"
+
+# build_tools: Kotlin builds with Gradle only.  The runner swaps in gradlew /
+# gradlew.bat when the project has one.
+[language.kotlin.build_tools]
+"build.gradle"     = ["gradle"]
+"build.gradle.kts" = ["gradle"]
+
+# Build and tests are built-in Gradle tasks.  Lint and coverage are NOT
+# built-in (`gradle check` also runs tests, and detekt/ktlint/jacoco may not be
+# declared): they come from config_commands, only when the project declares them.
+[language.kotlin.builtin_phases]
+# Gradle "build" also runs test and check, so a failing test or lint would
+# show as a Build failure and the build gate would hide it.  "assemble"
+# compiles and packages only.
+build    = ["gradle assemble"]
+lint     = []
+tests    = ["gradle test"]
+coverage = []
+
+# config_commands: the tool runs only when the build file declares its plugin
+# id (build_file_contains; comments in the build file are ignored).  A lone
+# detekt.yml does not count: without the plugin Gradle has no detekt task.
+# The ktlint id is the Gradle plugin's, so Spotless's `ktlint()` step (which
+# adds no ktlintCheck task) does not match.
+[[language.kotlin.config_commands]]
+stage               = "lint"
+build_file_contains = ["io.gitlab.arturbosch.detekt", "dev.detekt"]
+command             = "gradle detekt"
+
+[[language.kotlin.config_commands]]
+stage               = "lint"
+build_file_contains = ["org.jlleitschuh.gradle.ktlint"]
+command             = "gradle ktlintCheck"
+
+[[language.kotlin.config_commands]]
+stage               = "coverage"
+build_file_contains = ["jacoco"]
+command             = "gradle jacocoTestReport"
+
+
+[language.go]
+extensions        = [".go"]
+build_files       = ["go.mod"]
+build_priority    = ["go.mod"]
+dep_folders       = []
+# Go downloads modules itself; these mean it could not (offline, blocked, GOPROXY=off),
+# or the installed Go is older than go.mod needs.  "no required module provides
+# package" is not one: it means go.mod lacks a require line, a real project error.
+dep_error_phrases  = ["module lookup disabled by GOPROXY=off"]
+dep_error_patterns = ['''@v\S+: Get "https?://''', '''dial tcp''', '''^go: download go1\S+''', '''go\.mod requires go >= ''']
+# "[no test files]" with no "ok <package>" line: no test ran (not a vacuous pass).
+no_tests_patterns  = ['''^\?\s+\S+\s+\[no test files\]''', '''\[no tests to run\]''']
+tests_ran_patterns = ['''^ok\s+\S+\s+(\(cached\)|[\d.]+m?s)(\s+coverage: .*)?\s*$''']
+stages            = ["build", "lint", "tests", "coverage"]
+coverage_files    = ["coverage.out"]
+# Promoted after Session 14: every go-* check passed with real Go.
+tested            = true
+
+# -o /dev/null: build but write no program file into the project (with exactly one
+# package main, go build would save it there).  The runner passes NUL on Windows.
+[language.go.builtin_phases]
+build    = ["go build -o /dev/null ./..."]
+lint     = ["go vet ./..."]
+tests    = ["go test ./..."]
+coverage = ["go test -coverprofile=coverage.out ./..."]
+
+# go vet ships with the Go toolchain, so every Go module has a linter (no_linter_configured
+# does not apply).  A golangci-lint config declared by the project replaces it.
+# --fix=false overrides "issues: fix: true" in that config: the tool never rewrites code.
+[[language.go.config_commands]]
+stage   = "lint"
+files   = [".golangci.yml", ".golangci.yaml", ".golangci.json", ".golangci.toml",
+           "golangci.yml", "golangci.yaml"]
+command = "golangci-lint run --fix=false"
+
+
+[language.csharp]
+# C#/.NET — keyed as "csharp".  .slnx is the .NET 10 SDK's default solution format.
+extensions        = [".cs"]
+build_files       = ["*.sln", "*.slnx", "*.csproj"]
+build_priority    = ["*.sln", "*.slnx", "*.csproj"]
+dep_folders       = []
+# dotnet downloads NuGet packages itself; these mean it could not (NU1100-NU1103:
+# package not found / no matching version; NU1301-NU1302: feed unreachable;
+# NETSDK1004: packages never restored; dotnet format: "Restore operation failed."),
+# or the installed SDK is older than the target framework (NETSDK1045).  Other NU
+# errors (e.g. NU1605, a package downgrade) are real project errors and stay FAIL.
+dep_error_phrases  = []
+dep_error_patterns = ['''error NU1(10[0-3]|30[12])\b''', '''error NETSDK1045\b''', '''error NETSDK1004\b''', '''Restore operation failed\.''']
+# dotnet test prints one "Passed!  - Failed: 0, Passed: N, ..." line per test project that ran.
+# A test project with no tests says "No test is available in ..."; a solution or project
+# with no test project prints no "Passed!" line at all.  Either way: SKIP, not PASS.
+no_tests_patterns  = ['''No test is available in''', '''\A(?![\s\S]*^Passed!\s+-)''']
+tests_ran_patterns = ['''^Passed!\s+-\s+Failed:\s+0,\s+Passed:\s+[1-9]''']
+stages            = ["build", "lint", "tests", "coverage"]
+# `dotnet test` writes TestResults/<guid>/coverage.cobertura.xml (in the test project folder).
+coverage_files    = ["**/TestResults/*/coverage.cobertura.xml"]
+# Promoted after Session 15: every applicable csharp-* fixture passed.
+tested            = true
+
+# subproject_rules: a .csproj that a solution (.sln / .slnx) in an ancestor folder
+# lists is built by that solution, so it is part of the solution's project, not a
+# project of its own.  A .csproj the solution does not list stays its own project.
+# Keys are globs (solution names vary).
+[language.csharp.subproject_rules]
+"*.sln"  = "dotnet_solution"
+"*.slnx" = "dotnet_solution"
+
+# `dotnet format --verify-no-changes` is read-only and ships with the SDK, so every
+# .NET project has a linter.  Coverage is not built-in: the collector only works when the
+# test project references coverlet.collector (see config_commands).
+# {build_file} becomes the primary build file (the .sln/.slnx, else the .csproj): with
+# both in one folder, plain `dotnet format` fails and plain `dotnet test` runs no test.
+[language.csharp.builtin_phases]
+build    = ["dotnet build {build_file}"]
+lint     = ["dotnet format {build_file} --verify-no-changes"]
+tests    = ["dotnet test {build_file}"]
+coverage = []
+
+# For a solution, build_file_contains also reads every .csproj it lists (coverlet
+# is referenced by the test project, not the .sln).
+[[language.csharp.config_commands]]
+stage               = "coverage"
+build_file_contains = ["coverlet.collector"]
+files               = ["*.runsettings"]
+command             = 'dotnet test {build_file} --collect:"XPlat Code Coverage"'
+
+
+[language.rust]
+extensions        = [".rs"]
+build_files       = ["Cargo.toml"]
+build_priority    = ["Cargo.toml"]
+dep_folders       = []
+# Setup problems only (offline / blocked network, too-old rustc, a cargo
+# subcommand not installed).  NOT "no matching package", "failed to select a
+# version" or "failed to get `": cargo prints those for a misspelt crate, a
+# version that does not exist and a broken path dependency too.
+dep_error_phrases = ["failed to download from `", "offline mode (", "requires rustc ",
+                     "no such command: `", "is not installed for the toolchain"]
+# Network fetch of the registry or a git dependency failed.  Not a path
+# dependency ("unable to update /some/folder" is a real project error).
+# A missing linker (no Visual Studio C++ Build Tools on Windows, no `cc` on
+# macOS/Linux) is a setup problem too.  Not "linking with `cc` failed": that is
+# a real link error in the project's code.
+dep_error_patterns = ['''unable to update (registry `|https?://|ssh://|git@)''', '''^error: linker `[^`]+` not found''']
+stages            = ["build", "lint", "tests", "coverage"]
+coverage_files    = ["cobertura.xml", "lcov.info"]
+# cargo test prints "running N tests" once per test target (unit, integration,
+# doc).  All zero = nothing ran: Tests SKIP (no_tests_found), not PASS.
+no_tests_patterns  = ['''^running 0 tests$''']
+tests_ran_patterns = ['''^running [1-9]\d* tests?$''']
+tested            = false
+
+# A crate listed in a parent Cargo.toml [workspace] members (minus exclude)
+# is built by the workspace root, so it is part of the root project.
+[language.rust.subproject_rules]
+"Cargo.toml" = "cargo_workspace"
+
+# --workspace: in a workspace whose root is also a package, plain
+# `cargo build` builds only the root package.  On a single crate it changes nothing.
+[language.rust.builtin_phases]
+build    = ["cargo build --workspace"]
+lint     = ["cargo clippy --workspace"]
+tests    = ["cargo test --workspace"]
+coverage = []
+
+# cargo-tarpaulin is a separate install; it runs only when the crate has a
+# tarpaulin config file (the only places tarpaulin reads config from).
+# --output-dir . keeps cobertura.xml where coverage_files looks, even when the
+# config sets output-dir.
+[[language.rust.config_commands]]
+stage   = "coverage"
+files   = ["tarpaulin.toml", ".tarpaulin.toml"]
+command = "cargo tarpaulin --workspace --out Xml --output-dir ."
+
+
+[language.php]
+extensions        = [".php"]
+build_files       = ["composer.json"]
+build_priority    = ["composer.json"]
+dep_folders       = ["vendor"]
+# vendor/ is expected only when composer.json declares packages or an
+# autoloader.  A composer.json with only scripts needs no `composer install`.
+dep_declared_keys = ["require", "require-dev", "autoload", "autoload-dev"]
+# vendor/autoload.php missing = `composer install` never ran.  A PHP without a
+# coverage driver (PCOV/Xdebug) is a setup problem: PHPUnit exits 1 with a warning.
+dep_error_phrases  = ["vendor/autoload.php",
+                      "xdebug.mode=coverage (PHP configuration setting) has to be set"]
+dep_error_patterns = ['''No code coverage driver (is )?available''']
+# Composer scripts that run a fixer are skipped (golden rule: never run fixers).
+# Checked against every command a script runs, including @other-script ones.
+fixer_patterns = [
+    '''(^|[\s/\\])phpcbf(\.bat)?(\s|$)''',
+    '''(^|[\s/\\])php-cs-fixer(\.bat)?\s+fix\b(?!.*--dry-run)''',
+    '''(^|[\s/\\])pint(\.bat)?(\s|$)(?!.*--test)''',
+    '''(^|[\s/\\])rector(\.bat)?(\s|$)(?!.*--dry-run)''',
+    '''(^|[\s/\\])psalter(\.bat)?(\s|$)''',
+    '''(^|[\s/\\])psalm(\.bat)?\s.*--alter\b''',
+]
+stages            = ["lint", "tests", "coverage"]
+coverage_files    = ["clover.xml", "coverage.xml"]
+# PHPUnit prints "No tests executed!" and exits 0 when there is nothing to run.
+no_tests_patterns  = ['''^No tests executed!''']
+tests_ran_patterns = ['''^OK \(\d+ tests?, ''', '''^Tests: [1-9]\d*, ''']
+tested            = false
+
+[language.php.stage_names]
+build    = []
+lint     = ["lint", "check", "phpcs", "phpstan", "psalm", "phan"]
+tests    = ["test", "tests", "phpunit"]
+coverage = ["coverage", "cov"]
+
+[language.php.builtin_phases]
+build    = []
+lint     = []
+tests    = []
+coverage = []
+
+# Tools are project-local (vendor/bin/...) and run only when the project has
+# their config file next to composer.json (a composer script for the stage wins).
+# --no-coverage: the tests stage never writes coverage reports set in phpunit.xml.
+# --do-not-cache-result: PHPUnit writes no .phpunit.result.cache into the project.
+[[language.php.config_commands]]
+stage   = "tests"
+files   = ["phpunit.xml", "phpunit.xml.dist", "phpunit.dist.xml"]
+command = "vendor/bin/phpunit --no-coverage --do-not-cache-result"
+
+[[language.php.config_commands]]
+stage   = "lint"
+files   = ["phpcs.xml", "phpcs.xml.dist", ".phpcs.xml", ".phpcs.xml.dist"]
+command = "vendor/bin/phpcs"
+
+[[language.php.config_commands]]
+stage   = "lint"
+files   = ["phpstan.neon", "phpstan.neon.dist", "phpstan.dist.neon"]
+command = "vendor/bin/phpstan analyse"
+
+[[language.php.config_commands]]
+stage   = "lint"
+files   = ["psalm.xml", "psalm.xml.dist"]
+command = "vendor/bin/psalm"
+
+# php-cs-fixer rewrites files by default; only the read-only form is run.
+# --using-cache=no: it does not write .php-cs-fixer.cache into the project.
+[[language.php.config_commands]]
+stage   = "lint"
+files   = [".php-cs-fixer.php", ".php-cs-fixer.dist.php"]
+command = "vendor/bin/php-cs-fixer fix --dry-run --diff --using-cache=no"
+
+[[language.php.config_commands]]
+stage   = "coverage"
+files   = ["phpunit.xml", "phpunit.xml.dist", "phpunit.dist.xml"]
+command = "vendor/bin/phpunit --do-not-cache-result --coverage-clover clover.xml"
+
+
+[language.ruby]
+extensions        = [".rb"]
+build_files       = ["Gemfile"]
+build_priority    = ["Gemfile"]
+# No dep_folders: most Ruby projects use system or user gems, not vendor/bundle.
+dep_folders       = []
+# Gems not installed (Bundler 1.x to 4.x and RubyGems messages).  A misspelt gem
+# name in the Gemfile gives the same message; offline, the two cannot be told apart.
+dep_error_phrases = ["Could not find gem '", "Bundler::GemNotFound", "Gem::MissingSpecError",
+                     "Run `bundle install` to install missing gems",
+                     "Install missing gem executables with `bundle install`"]
+# `require "rspec"` with the gem missing.  NOT a path: require_relative of a
+# misspelt file prints an absolute path (/home/..., C:/...), a real code error.
+dep_error_patterns = ['''cannot load such file -- (?![A-Za-z]:[\\/]|[\\/.~])''']
+stages            = ["lint", "tests", "coverage"]
+# SimpleCov's own totals (line, branch), the numbers it prints.  Not
+# .resultset.json: that is raw data, before :nocov: and other exclusions.
+coverage_files    = ["coverage/.last_run.json"]
+# RSpec "0 examples, 0 failures" and minitest "0 runs, 0 assertions" exit 0.
+no_tests_patterns  = ['''^0 examples, 0 failures''', '''^0 runs, 0 assertions''']
+tests_ran_patterns = ['''^[1-9]\d* examples?, ''', '''^[1-9]\d* runs?, ''']
+# SimpleCov reports 100% when no test ran ("0 / 0 (100.00%)"): coverage SKIP then.
+coverage_needs_tests = true
+# Promoted after Session 18: every applicable ruby-* fixture passed with real Ruby.
+tested            = true
+
+[language.ruby.builtin_phases]
+build    = []
+lint     = []
+tests    = []
+coverage = []
+
+# A tool runs through bundler only when the project declares it with a config
+# file next to the Gemfile; a Gemfile that merely lists a gem detects nothing.
+[[language.ruby.config_commands]]
+stage   = "tests"
+files   = [".rspec"]
+command = "bundle exec rspec"
+
+[[language.ruby.config_commands]]
+stage   = "lint"
+files   = [".rubocop.yml", ".rubocop.yaml"]
+command = "bundle exec rubocop"
+
+# --no-fix: a .standard.yml with `fix: true` makes plain standardrb rewrite files.
+[[language.ruby.config_commands]]
+stage   = "lint"
+files   = [".standard.yml"]
+command = "bundle exec standardrb --no-fix"
+
+# Coverage = the specs run again under SimpleCov.  Needs .rspec (else there is
+# no rspec to run) and SimpleCov declared: a .simplecov file or the gem in the
+# Gemfile (with its quotes, so "simplecov-lcov" alone does not count).
+[[language.ruby.config_commands]]
+stage               = "coverage"
+requires_files      = [".rspec"]
+files               = [".simplecov"]
+build_file_contains = ['"simplecov"', "'simplecov'"]
+command             = "bundle exec rspec"
+
+
+[language.swift]
+extensions        = [".swift"]
+# Swift Package Manager only.  An Xcode project (*.xcodeproj) is a folder, not a
+# file, and needs xcodebuild plus a scheme, which cannot be guessed: not supported.
+build_files       = ["Package.swift"]
+build_priority    = ["Package.swift"]
+dep_folders       = []
+# SwiftPM downloads packages itself; offline or blocked it cannot clone them.
+# A Package.swift that needs a newer Swift than the one installed, a toolchain
+# without XCTest/Testing, or one without `swift format`, is a setup problem.
+# NOT "no such module" alone: a misspelt import prints it too (a real code error).
+# "XCTest not available": `swift test` on macOS without Xcode (Command Line Tools only).
+# "Loading sourcekitdInProc": SwiftLint crashes without Xcode's SourceKit.
+# "SwiftShims": Swift on Windows without Visual Studio's C++ tools / Windows SDK (no C
+# library headers); Swift's own runtime module, never broken by user code.
+dep_error_phrases  = ["error: Failed to clone repository ",
+                      "Couldn't fetch updates from remote repositories",
+                      "no such module 'XCTest'", "no such module 'Testing'",
+                      "error: XCTest not available", "Loading sourcekitdInProc",
+                      "could not build C module 'SwiftShims'"]
+dep_error_patterns = ['''is using Swift tools version \S+ but the installed version is ''',
+                      '''unknown or missing subcommand 'swift-format'''']
+stages            = ["build", "lint", "tests", "coverage"]
+# `swift test --enable-code-coverage` exports llvm-cov JSON to
+# .build/<platform>/debug/codecov/<package name>.json.
+coverage_files    = [".build/*/debug/codecov/*.json"]
+# XCTest prints "Executed 0 tests, with 0 failures" and swift-testing prints
+# "Test run with 0 tests" when a test target has no tests; both exit 0.
+no_tests_patterns  = ['''^\s*Executed 0 tests, with ''', '''Test run with 0 tests''']
+tests_ran_patterns = ['''Executed [1-9]\d* tests?, with ''', '''Test run with [1-9]\d* tests?''']
+# A package with no test target: `swift test` exits 1 with this message.
+no_tests_fail_patterns = ['''error: no tests found''']
+# Coverage = the tests run again; with no tests there is no coverage to read.
+coverage_needs_tests = true
+tested            = false
+
+[language.swift.builtin_phases]
+build    = ["swift build"]
+lint     = []
+tests    = ["swift test"]
+coverage = ["swift test --enable-code-coverage"]
+
+# Lint is not built in.  It runs only when the project has the tool's config file.
+# SwiftLint reads only .swiftlint.yml on its own (not .swiftlint.yaml).
+# --quiet: no "Linting 'x' (1/40)" lines filling the output tail.
+[[language.swift.config_commands]]
+stage   = "lint"
+files   = [".swiftlint.yml"]
+command = "swiftlint lint --quiet"
+
+# SwiftFormat (nicklockwood) rewrites files by default; only --lint is run.
+[[language.swift.config_commands]]
+stage   = "lint"
+files   = [".swiftformat"]
+command = "swiftformat --lint ."
+
+# swift-format (Apple, ships with Swift 6 / Xcode 16).  Without --strict every
+# finding is a warning and it exits 0, so Lint would always PASS.
+[[language.swift.config_commands]]
+stage   = "lint"
+files   = [".swift-format"]
+command = "swift format lint --strict --recursive ."
+
+
+[language.cpp]
+# C and C++ — keyed as "cpp".
+extensions        = [".c", ".cpp", ".cc", ".cxx", ".h", ".hpp"]
+build_files       = ["CMakeLists.txt", "Makefile", "meson.build"]
+build_priority    = ["CMakeLists.txt", "Makefile", "meson.build"]
+dep_folders       = []
+dep_error_phrases = []
+stages            = ["build", "lint", "tests", "coverage"]
+coverage_files    = ["lcov.info", "coverage.xml"]
+tested            = false
+
+[language.cpp.stage_names]
+build    = ["build", "compile", "all"]
+lint     = ["lint", "check", "clang-tidy", "cppcheck", "clang-format"]
+tests    = ["test", "tests", "ctest"]
+coverage = ["coverage", "cov"]
+
+[language.cpp.config_files]
+lint     = [".clang-tidy", ".clang-format", "CppCheckSuppressions.txt"]
+tests    = ["CTestTestfile.cmake"]
+coverage = []
+
+[language.cpp.builtin_phases]
+build    = ["cmake --build .", "make", "ninja"]
+lint     = []
+tests    = ["ctest --output-on-failure"]
+coverage = []

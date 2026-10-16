@@ -1,0 +1,5 @@
+
+> build
+> node -e "console.log('root build')"
+
+root build

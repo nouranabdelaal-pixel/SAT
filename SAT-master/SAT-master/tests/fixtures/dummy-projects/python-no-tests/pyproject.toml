@@ -1,0 +1,9 @@
+[project]
+name = "python-no-tests"
+version = "0.1.0"
+
+[tool.pytest.ini_options]
+markers = ["unit: unit tests"]
+
+[tool.ruff]
+line-length = 88

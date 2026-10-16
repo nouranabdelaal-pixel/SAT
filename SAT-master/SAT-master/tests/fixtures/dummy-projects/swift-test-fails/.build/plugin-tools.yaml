@@ -1,0 +1,112 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "PackageStructure": ["<PackageStructure>"]
+  "SwiftPackage-arm64-apple-macosx26.0-debug.module": ["<SwiftPackage-arm64-apple-macosx26.0-debug.module>"]
+  "SwiftPackagePackageTests-arm64-apple-macosx26.0-debug.module": ["<SwiftPackagePackageTests-arm64-apple-macosx26.0-debug.module>"]
+  "SwiftPackagePackageTests-arm64-apple-macosx26.0-debug.test": ["<SwiftPackagePackageTests-arm64-apple-macosx26.0-debug.test>"]
+  "SwiftPackageTests-arm64-apple-macosx26.0-debug.module": ["<SwiftPackageTests-arm64-apple-macosx26.0-debug.module>"]
+  "main": ["<SwiftPackage-arm64-apple-macosx26.0-debug.module>"]
+  "test": ["<SwiftPackage-arm64-apple-macosx26.0-debug.module>","<SwiftPackagePackageTests-arm64-apple-macosx26.0-debug.test>","<SwiftPackageTests-arm64-apple-macosx26.0-debug.module>"]
+default: "main"
+nodes:
+  "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/Sources/SwiftPackage/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+  "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/Tests/SwiftPackageTests/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+commands:
+  "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackage.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/Sources/SwiftPackage/Add.swift"]
+    outputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackage.build/sources"]
+    description: "Write auxiliary file /Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackage.build/sources"
+
+  "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.derived/runner.swift"]
+    outputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/sources"]
+    description: "Write auxiliary file /Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/sources"
+
+  "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.derived/runner.swift":
+    tool: test-entry-point-tool
+    inputs: []
+    outputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.derived/runner.swift"]
+
+  "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackage.build/Add.swift.o","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/runner.swift.o","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/AddTests.swift.o"]
+    outputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.product/Objects.LinkFileList"
+
+  "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/Tests/SwiftPackageTests/AddTests.swift"]
+    outputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/sources"]
+    description: "Write auxiliary file /Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/sources"
+
+  "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"]
+    outputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+
+  "<SwiftPackage-arm64-apple-macosx26.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackage.build/Add.swift.o","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules/SwiftPackage.swiftmodule"]
+    outputs: ["<SwiftPackage-arm64-apple-macosx26.0-debug.module>"]
+
+  "<SwiftPackagePackageTests-arm64-apple-macosx26.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/runner.swift.o","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules/SwiftPackagePackageTests.swiftmodule"]
+    outputs: ["<SwiftPackagePackageTests-arm64-apple-macosx26.0-debug.module>"]
+
+  "<SwiftPackagePackageTests-arm64-apple-macosx26.0-debug.test>":
+    tool: phony
+    inputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.xctest/Contents/MacOS/SwiftPackagePackageTests"]
+    outputs: ["<SwiftPackagePackageTests-arm64-apple-macosx26.0-debug.test>"]
+
+  "<SwiftPackageTests-arm64-apple-macosx26.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/AddTests.swift.o","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules/SwiftPackageTests.swiftmodule"]
+    outputs: ["<SwiftPackageTests-arm64-apple-macosx26.0-debug.module>"]
+
+  "C.SwiftPackage-arm64-apple-macosx26.0-debug.module":
+    tool: shell
+    inputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/Sources/SwiftPackage/Add.swift","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackage.build/sources"]
+    outputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackage.build/Add.swift.o","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules/SwiftPackage.swiftmodule"]
+    description: "Compiling Swift Module 'SwiftPackage' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","SwiftPackage","-emit-dependencies","-emit-module","-emit-module-path","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules/SwiftPackage.swiftmodule","-output-file-map","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackage.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackage.build/sources","-I","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx10.13","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j10","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-emit-objc-header","-emit-objc-header-path","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackage.build/include/SwiftPackage-Swift.h","-profile-coverage-mapping","-profile-generate","-swift-version","5","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","swift_test_fails"]
+
+  "C.SwiftPackagePackageTests-arm64-apple-macosx26.0-debug.module":
+    tool: shell
+    inputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.derived/runner.swift","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules/SwiftPackageTests.swiftmodule","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/sources"]
+    outputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/runner.swift.o","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules/SwiftPackagePackageTests.swiftmodule"]
+    description: "Compiling Swift Module 'SwiftPackagePackageTests' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","SwiftPackagePackageTests","-emit-dependencies","-emit-module","-emit-module-path","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules/SwiftPackagePackageTests.swiftmodule","-output-file-map","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/sources","-I","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx10.13","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-Xfrontend","-enable-cross-import-overlays","-j10","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-emit-objc-header","-emit-objc-header-path","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/include/SwiftPackagePackageTests-Swift.h","-profile-coverage-mapping","-profile-generate","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","swift_test_fails"]
+
+  "C.SwiftPackagePackageTests-arm64-apple-macosx26.0-debug.test":
+    tool: shell
+    inputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackage.build/Add.swift.o","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/runner.swift.o","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/AddTests.swift.o","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.product/Objects.LinkFileList"]
+    outputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.xctest/Contents/MacOS/SwiftPackagePackageTests"]
+    description: "Linking ./.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.xctest/Contents/MacOS/SwiftPackagePackageTests"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-L","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug","-o","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.xctest/Contents/MacOS/SwiftPackagePackageTests","-module-name","SwiftPackagePackageTests","-profile-coverage-mapping","-profile-generate","-Xlinker","-no_warn_duplicate_libraries","-Xlinker","-bundle","-Xlinker","-rpath","-Xlinker","@loader_path/../../../","@/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.product/Objects.LinkFileList","-Xlinker","-rpath","-Xlinker","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx","-target","arm64-apple-macosx14.0","-Xlinker","-add_ast_path","-Xlinker","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules/SwiftPackage.swiftmodule","-Xlinker","-add_ast_path","-Xlinker","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules/SwiftPackagePackageTests.swiftmodule","-Xlinker","-add_ast_path","-Xlinker","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules/SwiftPackageTests.swiftmodule","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g"]
+
+  "C.SwiftPackageTests-arm64-apple-macosx26.0-debug.module":
+    tool: shell
+    inputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/Tests/SwiftPackageTests/AddTests.swift","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules/SwiftPackage.swiftmodule","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/sources"]
+    outputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/AddTests.swift.o","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules/SwiftPackageTests.swiftmodule"]
+    description: "Compiling Swift Module 'SwiftPackageTests' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","SwiftPackageTests","-emit-dependencies","-emit-module","-emit-module-path","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules/SwiftPackageTests.swiftmodule","-output-file-map","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/sources","-I","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx14.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-Xfrontend","-enable-cross-import-overlays","-j10","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-profile-coverage-mapping","-profile-generate","-swift-version","5","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","swift_test_fails"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/Sources/SwiftPackage/","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/Tests/SwiftPackageTests/","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/Package.swift","/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+

@@ -1,0 +1,63 @@
+{
+  "simplecov_history": {
+    "format_version": 1,
+    "entries": [
+      {
+        "created_at": "2026-10-13T00:23:35Z",
+        "branch": null,
+        "commit": null,
+        "totals": {
+          "line": 100.0
+        },
+        "groups": {},
+        "files": {
+          "lib/app.rb": {
+            "line": 100.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-10-13T00:23:39Z",
+        "branch": null,
+        "commit": null,
+        "totals": {
+          "line": 100.0
+        },
+        "groups": {},
+        "files": {
+          "lib/app.rb": {
+            "line": 100.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-10-13T00:50:15Z",
+        "branch": null,
+        "commit": null,
+        "totals": {
+          "line": 100.0
+        },
+        "groups": {},
+        "files": {
+          "lib/app.rb": {
+            "line": 100.0
+          }
+        }
+      },
+      {
+        "created_at": "2026-10-13T00:50:18Z",
+        "branch": null,
+        "commit": null,
+        "totals": {
+          "line": 100.0
+        },
+        "groups": {},
+        "files": {
+          "lib/app.rb": {
+            "line": 100.0
+          }
+        }
+      }
+    ]
+  }
+}

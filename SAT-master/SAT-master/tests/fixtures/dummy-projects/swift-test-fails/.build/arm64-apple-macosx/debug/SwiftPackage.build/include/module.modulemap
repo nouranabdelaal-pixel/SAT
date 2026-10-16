@@ -1,0 +1,3 @@
+module SwiftPackage {
+    header "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackage.build/include/SwiftPackage-Swift.h"
+}

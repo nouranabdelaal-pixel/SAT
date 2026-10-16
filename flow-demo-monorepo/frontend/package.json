@@ -1,0 +1,7 @@
+{
+  "name": "flow-demo-frontend",
+  "scripts": {
+    "build": "node -e \"console.log('frontend build')\"",
+    "test": "node -e \"console.log('frontend tests')\""
+  }
+}

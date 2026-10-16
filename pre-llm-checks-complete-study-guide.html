@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pre-LLM Checks - Complete Study Guide</title>
+<style>
+:root{--ink:#263238;--blue:#0b4f6c;--teal:#2a9d8f;--orange:#e76f51;--paper:#fbfaf7;--line:#d8e1e5;--code:#183642}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.58 Georgia,serif}main{max-width:1000px;margin:auto;padding:42px 28px 80px}h1,h2,h3{color:var(--blue);line-height:1.15}h1{font-size:3em;margin:0 0 10px;border-bottom:5px solid #f4a261;padding-bottom:14px}h2{font-size:1.9em;margin-top:48px;border-bottom:2px solid var(--line);padding-bottom:6px}h3{font-size:1.25em;margin-top:28px}.lede{font-size:1.25em;max-width:760px}.notice,.tip,.danger{padding:15px 19px;margin:20px 0;border-left:5px solid}.notice{background:#fff0e8;border-color:var(--orange)}.tip{background:#e9f5f2;border-color:var(--teal)}.danger{background:#fff4d9;border-color:#e9c46a}pre{background:var(--code);color:#f4f0e8;padding:17px 20px;border-radius:6px;overflow:auto}code{font-family:Consolas,monospace;background:#edf1f2;padding:2px 5px;border-radius:3px}pre code{background:none;padding:0}.table{width:100%;border-collapse:collapse;margin:14px 0}.table th,.table td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:9px 8px}.table th{background:#e9f0f2;color:var(--blue)}.small{font-size:.9em;color:#52636a}.columns{columns:2;column-gap:38px}.columns li{break-inside:avoid;margin-bottom:7px}.quiz{background:white;border:1px solid var(--line);padding:18px;margin:18px 0}.quiz summary{cursor:pointer;color:var(--blue);font-weight:bold}.toc{background:white;padding:18px 25px;border:1px solid var(--line)}.toc li{margin:4px}.checklist{list-style:none;padding:0}.checklist li{margin:8px 0}.checklist li:before{content:'[ ] ';font-family:monospace;color:var(--teal);font-weight:bold}@media(max-width:700px){main{padding:25px 17px}h1{font-size:2.25em}.columns{columns:1}.table{font-size:.9em}}
+</style>
+</head>
+<body><main>
+<h1>Pre-LLM Checks</h1>
+<p class="lede">A complete standalone study guide for using, understanding, testing, and extending the SAT project: <strong>Pre-LLM Checks</strong>.</p>
+<div class="notice"><strong>Central idea:</strong> Pre-LLM Checks gathers evidence before an AI reviews a repository. It asks whether the repository builds, lints, tests, and reports coverage. It does not use AI, fix code, install packages, or decide whether code is good.</div>
+
+<h2>1. Learning outcomes</h2>
+<p>After studying this guide, you should be able to:</p>
+<ul class="checklist"><li>Run a safe preview and a real check on a repository.</li><li>Explain how projects are discovered and how commands are selected.</li><li>Interpret every important stage status and exit code.</li><li>Read <code>pre-llm-report.json</code> as evidence for an AI reviewer.</li><li>Diagnose gates, missing tools, missing dependencies, stale coverage, and no-test cases.</li><li>Explain the architecture and data-driven language system.</li><li>Identify current v1 limitations and known implementation gaps.</li><li>Extend the rulebook and fixtures without weakening safety.</li></ul>
+
+<h2>2. What the tool does</h2>
+<p>One invocation scans a folder, finds supported projects, determines which commands each project has defined, runs the commands in a controlled order, and produces two outputs:</p>
+<ul><li>A human-readable terminal table.</li><li>A machine-readable <code>pre-llm-report.json</code> file for an AI reviewer.</li></ul>
+<p>The tool needs Python 3.11 or newer and no third-party packages. The tool itself does not install anything.</p>
+<div class="tip"><strong>Evidence, not judgement:</strong> a coverage result of 42% is reported, but v1 does not decide that 42% is unacceptable. A missing linter is reported as a warning, not silently treated as a pass.</div>
+
+<h2>3. Safety model</h2>
+<p>The tool is designed to be read-only with respect to the project source. However, the commands it runs belong to the project and can contain arbitrary behavior.</p>
+<h3>Rules</h3><ul><li>It does not change source code.</li><li>It does not install dependencies.</li><li>It does not run ordinary fixers or formatters.</li><li>It runs commands as argument lists with <code>shell=False</code>.</li><li>It runs from each project's own folder.</li><li>It masks many secrets in commands, output, logs, and reports.</li><li>It writes logs and the report; with <code>--add-gitignore</code>, it may also update <code>.gitignore</code>.</li><li>It has no sandbox in v1.</li></ul>
+<p>Every real run starts with a trust notice. On unfamiliar code, preview first:</p>
+<pre><code>py -3 pre_llm_checks.py --path C:\code\unknown-repo --dry-run</code></pre>
+<p>Review every planned command before removing <code>--dry-run</code>.</p>
+
+<h2>4. Installation and first run</h2>
+<p>There is no package installation for the tool. Place the SAT project somewhere accessible and use Python 3.11+.</p>
+<h3>Windows PowerShell</h3><pre><code>py -3 C:\tools\SAT\pre_llm_checks.py --path C:\code\my-repo --dry-run
+py -3 C:\tools\SAT\pre_llm_checks.py --path C:\code\my-repo</code></pre>
+<h3>macOS or Linux</h3><pre><code>python3 /path/to/SAT/pre_llm_checks.py --path ~/code/my-repo --dry-run
+python3 /path/to/SAT/pre_llm_checks.py --path ~/code/my-repo</code></pre>
+<p>Without <code>--path</code>, the current folder is checked. The default report is written to the current folder as <code>pre-llm-report.json</code>; use <code>--output</code> to choose another location.</p>
+
+<h2>5. Complete command-line reference</h2>
+<table class="table"><tr><th>Option</th><th>Purpose</th><th>Example</th></tr>
+<tr><td><code>--path</code></td><td>Folder to scan. Defaults to the current folder.</td><td><code>--path C:\repo</code></td></tr>
+<tr><td><code>--output</code></td><td>Report destination.</td><td><code>--output evidence.json</code></td></tr>
+<tr><td><code>--dry-run</code></td><td>Display planned commands without running them. Normal dry runs write no report.</td><td><code>--dry-run</code></td></tr>
+<tr><td><code>--steps</code></td><td>Choose stages. Omitting build disables the build gate; omitting lint disables the lint gate; omitting tests disables the tests-to-coverage gate.</td><td><code>--steps build,tests</code></td></tr>
+<tr><td><code>--lint-anyway</code></td><td>Run lint even after a build failure or timeout.</td><td><code>--lint-anyway</code></td></tr>
+<tr><td><code>--verbose</code></td><td>Stream command output live and show every command.</td><td><code>--verbose</code></td></tr>
+<tr><td><code>--timeout-build</code>, etc.</td><td>Change a stage limit. Accepted formats include seconds, <code>90s</code>, <code>30m</code>, <code>1h</code>, and <code>1h30m</code>.</td><td><code>--timeout-tests 30m</code></td></tr>
+<tr><td><code>--tail-lines</code></td><td>Change how many output lines are kept in the JSON report.</td><td><code>--tail-lines 20</code></td></tr>
+<tr><td><code>--config</code></td><td>Use a different <code>languages.toml</code> rulebook.</td><td><code>--config team-languages.toml</code></td></tr>
+<tr><td><code>--add-gitignore</code></td><td>Add <code>.pre-llm/</code> to the checked repository's <code>.gitignore</code>.</td><td><code>--add-gitignore</code></td></tr>
+<tr><td><code>--version</code></td><td>Print the tool version.</td><td><code>--version</code></td></tr></table>
+
+<h2>6. The pipeline</h2>
+<p>The normal flow is:</p><pre><code>Find projects
+    -> Detect project-defined commands
+    -> Build
+    -> Lint
+    -> Tests
+    -> Coverage
+    -> Terminal table + JSON report</code></pre>
+<p>Each project is independent. A failing project does not stop other projects from running.</p>
+<h3>Build gate</h3><p>If Build fails or times out, Lint, Tests, and Coverage are skipped for that project. <code>--lint-anyway</code> makes an exception for Lint. Build <code>WARN</code> or <code>SKIP</code> does not activate the gate.</p>
+<h3>Lint gate</h3><p>If Lint fails or times out, Tests and Coverage are skipped. A linter warning, missing linter, or skipped lint stage does not activate the gate.</p>
+<h3>Tests gate</h3><p>If Tests fails or times out, Coverage is skipped. If no tests are found, Tests becomes <code>SKIP</code> and Coverage becomes <code>FAIL</code> with reason <code>no_tests_found</code>. This prevents an empty test suite from appearing healthy.</p>
+<h3>Coverage behavior</h3><p>Coverage often runs tests again with coverage enabled. It reads fresh reports written during that coverage run. Old reports are ignored. If no report file exists, it may parse a percentage from command output. There is no minimum coverage threshold in v1.</p>
+
+<h2>7. Statuses and exit codes</h2>
+<table class="table"><tr><th>Status</th><th>Meaning</th><th>Does it count as an error?</th></tr>
+<tr><td><strong>PASS</strong></td><td>Every command in the stage passed. Coverage displays a percentage.</td><td>No.</td></tr>
+<tr><td><strong>FAIL</strong></td><td>A command failed, or Coverage failed because no tests were found.</td><td>Yes.</td></tr>
+<tr><td><strong>TIMEOUT</strong></td><td>The command exceeded its stage limit; the process tree was killed.</td><td>Yes.</td></tr>
+<tr><td><strong>WARN</strong></td><td>Evidence could not be collected because of setup or configuration: missing tool, dependencies, linter, or coverage.</td><td>No, but it is not a pass.</td></tr>
+<tr><td><strong>SKIP</strong></td><td>The stage did not run because of a gate, no command, omitted stage, or no tests.</td><td>No by itself.</td></tr>
+<tr><td><strong>INTR</strong></td><td>The user interrupted the run with Ctrl+C.</td><td>Yes; exit 130.</td></tr></table>
+<table class="table"><tr><th>Exit code</th><th>Meaning</th></tr><tr><td>0</td><td>Everything passed or only warnings occurred.</td></tr><tr><td>1</td><td>Something failed or timed out.</td></tr><tr><td>2</td><td>Tool error: invalid flag, invalid path, broken configuration, or internal error.</td></tr><tr><td>3</td><td>No supported project was found.</td></tr><tr><td>130</td><td>Interrupted by Ctrl+C.</td></tr></table>
+
+<h2>8. Project discovery</h2>
+<p>A project is a folder containing a recognized build file. The rulebook in <code>languages.toml</code> identifies build files and languages.</p>
+<h3>Recognized project markers</h3><ul class="columns"><li>Python: <code>pyproject.toml</code>, <code>requirements.txt</code></li><li>Java/Kotlin: <code>pom.xml</code>, <code>build.gradle</code>, <code>build.gradle.kts</code></li><li>JavaScript/TypeScript: <code>package.json</code></li><li>Go: <code>go.mod</code></li><li>C#/.NET: <code>.sln</code>, <code>.slnx</code>, <code>.csproj</code></li><li>Rust: <code>Cargo.toml</code></li><li>PHP: <code>composer.json</code></li><li>Ruby: <code>Gemfile</code></li><li>Swift: <code>Package.swift</code></li><li>C/C++: <code>CMakeLists.txt</code>, <code>Makefile</code>, <code>meson.build</code></li></ul>
+<h3>Discovery rules</h3><ul><li>The nearest build file owns source files.</li><li>One project is created per folder per language.</li><li>For Python, <code>pyproject.toml</code> has priority over <code>requirements.txt</code>, but both may be listed.</li><li>For .NET, a solution has priority over a project file.</li><li>Maven modules and Gradle subprojects are folded into their root build where the rulebook says the root owns them.</li><li>Skip directories include dependency, build, generated, cache, and tool folders such as <code>node_modules</code>, <code>.git</code>, <code>target</code>, <code>dist</code>, <code>vendor</code>, <code>bin</code>, <code>obj</code>, <code>__pycache__</code>, <code>.pre-llm</code>, and others.</li><li>Source files without a build file produce warnings rather than becoming projects.</li></ul>
+
+<h2>9. How commands are selected</h2>
+<p>A command is eligible only when the project itself defines or selects it. The tool does not run every installed tool it can find.</p>
+<ol><li><strong>Build-file scripts:</strong> for example, <code>lint</code>, <code>lint:types</code>, <code>test</code>, or <code>build</code> in <code>package.json</code>.</li><li><strong>Configuration files:</strong> for example <code>.golangci.yml</code>, <code>.rubocop.yml</code>, <code>pytest.ini</code>, or <code>tsconfig.json</code>.</li><li><strong>Build plugins:</strong> for example Checkstyle or JaCoCo in Maven/Gradle configuration.</li><li><strong>Language built-ins:</strong> for example <code>go test ./...</code>, <code>cargo build</code>, or <code>dotnet build</code> where the language rules define them.</li><li><strong>Overrides:</strong> commands in <code>pre-llm.toml</code> replace detected commands for a selected project and stage.</li></ol>
+<p>Exact names and prefixes match stage names. For example, <code>lint</code> and <code>lint:types</code> map to Lint. Identical commands run once; different arguments are different commands.</p>
+<h3>Scripts intentionally skipped</h3><p>Scripts are skipped when their names end in <code>:fix</code>, <code>:watch</code>, <code>:dev</code>, <code>:serve</code>, <code>:e2e</code>, <code>:docker</code>, or <code>:deploy</code>, or when their command uses <code>--fix</code> or <code>--write</code>. They appear under <code>skipped_scripts</code> with a reason.</p>
+<div class="danger"><strong>Important v1 gap:</strong> a <code>pre-llm.toml</code> override is trusted as project-defined. If an owner writes a fixer such as <code>ruff check --fix .</code> there, the override may run it. This is a known safety gap.</div>
+
+<h2>10. Configure overrides with pre-llm.toml</h2>
+<p>Place an optional <code>pre-llm.toml</code> at the repository root:</p><pre><code>ignore = ["legacy", "generated"]
+
+[[project]]
+path = "backend"
+lint = "npm run check-style"
+tests = "pytest -q"</code></pre>
+<p><code>ignore</code> adds paths to the discovery skip list. A project override counts as project-defined and replaces automatic detection for that stage. v1 supports only ignore paths and per-project stage overrides.</p>
+
+<h2>11. Language behavior</h2>
+<table class="table"><tr><th>Language</th><th>Typical Build</th><th>Typical Lint</th><th>Typical Tests/Coverage</th><th>Verification</th></tr>
+<tr><td>Python</td><td>Usually SKIP</td><td>ruff, flake8, pylint, mypy when configured</td><td>pytest; coverage.py/pytest-cov</td><td>Tested</td></tr>
+<tr><td>JavaScript/TypeScript</td><td>project build or <code>tsc --noEmit</code></td><td>eslint/biome or lint script</td><td>Jest, Vitest, Mocha; Istanbul/lcov</td><td>Tested</td></tr>
+<tr><td>Java</td><td>Maven compile or Gradle assemble</td><td>Checkstyle, PMD, SpotBugs</td><td>Maven/Gradle tests; JaCoCo</td><td>Tested</td></tr>
+<tr><td>Kotlin</td><td>Gradle assemble</td><td>detekt/ktlint</td><td>Gradle tests; JaCoCo</td><td>Tested</td></tr>
+<tr><td>Go</td><td><code>go build ./...</code></td><td><code>go vet</code> or golangci-lint</td><td><code>go test ./...</code>; cover profile</td><td>Tested</td></tr>
+<tr><td>C#/.NET</td><td><code>dotnet build</code></td><td><code>dotnet format --verify-no-changes</code></td><td><code>dotnet test</code>; coverlet</td><td>Tested</td></tr>
+<tr><td>Ruby</td><td>Usually SKIP</td><td>rubocop/standardrb</td><td>RSpec; SimpleCov</td><td>Tested</td></tr>
+<tr><td>Rust</td><td><code>cargo build --workspace</code></td><td><code>cargo clippy</code></td><td><code>cargo test</code>; tarpaulin</td><td>Supported, untested</td></tr>
+<tr><td>PHP</td><td>Usually SKIP</td><td>PHPCS, PHPStan, Psalm</td><td>PHPUnit; Clover</td><td>Supported, untested</td></tr>
+<tr><td>Swift</td><td><code>swift build</code></td><td>SwiftLint/SwiftFormat</td><td><code>swift test</code>; llvm-cov</td><td>Supported, untested</td></tr>
+<tr><td>C/C++</td><td>CMake, Make, or Ninja</td><td>Project-defined</td><td>CTest/project-defined; lcov</td><td>Supported, untested</td></tr></table>
+<p><strong>Tested</strong> means applicable fixtures passed with real tools. <strong>Supported but untested</strong> does not automatically mean broken; it means the project has not verified all expected cases on available machines.</p>
+
+<h2>12. Runner behavior</h2>
+<ul><li>Commands use argument lists, not shell strings.</li><li>Executable lookup handles platform endings such as <code>.cmd</code> and <code>.exe</code>.</li><li>Maven and Gradle wrappers win over global commands.</li><li>Default limits are Build 10 minutes, Lint 5 minutes, Tests 15 minutes, Coverage 15 minutes.</li><li>A timeout kills the whole child process tree, not only the parent process.</li><li>Ctrl+C kills the running tree, marks the run interrupted, writes the report, and exits 130.</li><li>Output is decoded with UTF-8 replacement so unusual bytes do not crash the run.</li><li>Full output goes to logs; the report keeps a bounded tail.</li></ul>
+
+<h2>13. Coverage behavior</h2>
+<p>The tool does not calculate coverage itself. It runs the project's coverage command and reads supported output formats.</p>
+<ul><li>JaCoCo XML for Java/Kotlin.</li><li>Cobertura XML for Python, .NET, Rust, and related tools.</li><li>Istanbul JSON summary or lcov for JavaScript/TypeScript.</li><li>Go cover profiles.</li><li>SimpleCov JSON for Ruby.</li><li>llvm-cov JSON for Swift.</li></ul>
+<p>Coverage files must be fresh: a file older than the start of the Coverage stage is ignored. If multiple reports exist, results are not averaged; the lowest line percentage is shown. A broken report is ignored with a warning. v1 has no threshold and does not parse structured findings from coverage or test formats.</p>
+
+<h2>14. The JSON report</h2>
+<p>The report is intended for an AI reviewer. It is always written for a real run, including after early errors or interruption. A normal report contains:</p>
+<pre><code>{
+  "schema_version": "1.0",
+  "summary": {
+    "status": "pass",
+    "project_count": 1,
+    "counts": {"pass": 4, "fail": 0, "timeout": 0,
+               "warning": 0, "skipped": 0, "interrupted": 0},
+    "generated_at": "UTC ISO-8601 timestamp"
+  },
+  "warnings": [],
+  "projects": [],
+  "environment": {"os": "...", "runners": {}}
+}</code></pre>
+<h3>Important fields</h3><table class="table"><tr><th>Field</th><th>Meaning</th></tr><tr><td><code>schema_version</code></td><td>Version of the report shape. Shape changes must bump it.</td></tr><tr><td><code>summary.status</code></td><td>Overall pass, fail, interrupted, error, or no_project state.</td></tr><tr><td><code>summary.counts</code></td><td>Counts table cells by status across projects and stages.</td></tr><tr><td><code>projects</code></td><td>Project path, language, build files, skipped scripts, commands, and warnings.</td></tr><tr><td><code>commands</code></td><td>Stage, argument list, source, status, duration, output tail, log path, reason, and reserved findings.</td></tr><tr><td><code>environment</code></td><td>Operating system and versions of tools that actually ran.</td></tr><tr><td><code>findings</code></td><td><code>null</code> in v1; structured JUnit/SARIF parsing is not implemented.</td></tr><tr><td><code>truncated</code></td><td>Present only when the report exceeded its approximate size budget.</td></tr></table>
+<p>Output tails default to 50 lines, each limited to 500 characters. The total report is capped around 200 KB so it remains usable in an AI context window. Paths are relative to the repository root and use forward slashes.</p>
+
+<h2>15. Edge cases handled</h2>
+<table class="table"><tr><th>Situation</th><th>Behavior</th></tr>
+<tr><td>Missing path or path is a file</td><td>Error message, exit 2, report with error status.</td></tr><tr><td>No supported project</td><td>Warning, exit 3, report with no_project status.</td></tr><tr><td>Monorepo</td><td>One independent row per discovered project.</td></tr><tr><td>Two languages in one folder</td><td>Separate project per language.</td></tr><tr><td>Source without build file</td><td>Warning, not a guessed project.</td></tr><tr><td>Installed linter with no project declaration</td><td>Not run.</td></tr><tr><td>Risky fixer/watch/deploy script</td><td>Skipped and recorded.</td></tr><tr><td>Duplicate command</td><td>Runs once.</td></tr><tr><td>No linter</td><td>Lint WARN; tests may still run.</td></tr><tr><td>Linter not installed</td><td>WARN tool_not_installed.</td></tr><tr><td>Dependencies missing</td><td>WARN dependencies_missing; never installs.</td></tr><tr><td>Zero tests</td><td>Tests SKIP; Coverage FAIL.</td></tr><tr><td>Build failure</td><td>Later stages SKIP; lint-anyway can run Lint.</td></tr><tr><td>Hanging command</td><td>Whole process tree killed; TIMEOUT.</td></tr><tr><td>Ctrl+C during command</td><td>Tree killed, report written, exit 130.</td></tr><tr><td>Odd output bytes</td><td>Decoded with replacement characters.</td></tr><tr><td>Stale coverage file</td><td>Ignored.</td></tr><tr><td>Coverage percentage only in output</td><td>Percentage may be parsed as fallback.</td></tr><tr><td>Broken coverage file</td><td>Warning, no crash.</td></tr><tr><td>Several coverage reports</td><td>Lowest result shown, never averaged.</td></tr><tr><td>Broken pre-llm.toml</td><td>Clean configuration error, exit 2.</td></tr></table>
+
+<h2>16. Known gaps and not-yet-handled behavior</h2>
+<h3>Confirmed implementation gaps</h3><ol><li><strong>Incomplete secret masking:</strong> JSON-style secrets such as <code>"password": "value"</code>, space-separated flags such as <code>--password value</code>, and some bare GitHub/AWS keys may remain visible.</li><li><strong>Unsafe overrides:</strong> a trusted override can explicitly contain a fixer command.</li><li><strong>Symlinked folders:</strong> discovery does not follow symlinked folders, and this can be silent.</li><li><strong>Python version message:</strong> Python 3.10 may crash before the tool can provide a friendly version error or report.</li><li><strong>Early scan interruption:</strong> Ctrl+C during a very large folder scan is not handled as cleanly as Ctrl+C during command execution.</li><li><strong>Untested languages:</strong> Rust, PHP, Swift, and C/C++ are not fully validated with real tools in the project record.</li></ol>
+<h3>Features intentionally outside v1</h3><ul class="columns"><li>Parallel project execution</li><li>Language filtering</li><li>Changed-files-only checks</li><li>Coverage thresholds</li><li>Dependency installation</li><li>CI or remote integration</li><li>Sandboxing</li><li>Zip input</li><li>Git URL input</li><li>Single-file input</li><li>Tool-specific finding parsers</li><li>JUnit XML and SARIF readers</li></ul>
+<p>Low coverage does not fail a run in v1. No tests do cause Coverage to fail. Optional strict mode and a minimum coverage flag were proposed but require a specification change.</p>
+
+<h2>17. Architecture</h2>
+<p>The project is divided into focused Python modules:</p>
+<table class="table"><tr><th>Module</th><th>Responsibility</th></tr><tr><td><code>pre_llm_checks.py</code></td><td>Entry point, CLI parsing, path validation, trust notice, report coordination.</td></tr><tr><td><code>discovery.py</code></td><td>Walks the repository and finds projects.</td></tr><tr><td><code>detection.py</code></td><td>Finds commands, skips risky scripts, removes duplicates, loads overrides.</td></tr><tr><td><code>runner.py</code></td><td>Executes one command with no shell, timeouts, process-tree cleanup, and decoding.</td></tr><tr><td><code>orchestrator.py</code></td><td>Runs stages in order and applies gates/status rules.</td></tr><tr><td><code>coverage_readers.py</code></td><td>Reads supported coverage files and checks freshness.</td></tr><tr><td><code>output.py</code></td><td>Renders the terminal table, environment data, and exit logic.</td></tr><tr><td><code>masking.py</code></td><td>Removes recognized secrets from output.</td></tr><tr><td><code>languages.toml</code></td><td>Data-driven language rulebook: files, commands, patterns, coverage, and tested state.</td></tr></table>
+<p>The design principle is: <strong>language knowledge belongs in data, not Python control flow.</strong> Adding a language should normally mean adding a rulebook entry and fixtures rather than changing the engine.</p>
+
+<h2>18. How to test the project</h2>
+<p>The automated suite uses pytest:</p><pre><code>py -3 -m pytest -q</code></pre>
+<p>The project uses black-box expectations around exit codes, terminal output, and report structure. Fake-tool tests replace real command execution so language planning can be tested without every compiler installed. Golden files preserve expected output. Manual scripts run real tools against sample projects.</p>
+<h3>Fixture categories</h3><ul><li>Working project.</li><li>Build failure.</li><li>Test failure.</li><li>Lint failure.</li><li>No tests.</li><li>No linter.</li><li>Risky scripts.</li><li>Duplicate scripts.</li><li>Hanging command.</li><li>Monorepo.</li><li>Missing dependencies.</li><li>Interrupted run.</li></ul>
+<p>When intentionally changing report shape, update the schema version and regenerate/review golden files. Never silently update golden output without understanding the behavior change.</p>
+
+<h2>19. Extending the tool with a language</h2>
+<ol><li>Add a <code>[language.name]</code> entry to <code>languages.toml</code>.</li><li>Define extensions, build files, stage names, built-in commands, configuration commands, dependency checks, no-test patterns, and coverage files.</li><li>Add fixtures for applicable successful and failing cases.</li><li>Record expected results.</li><li>Add the successful fixture to fake-run coverage and generate its golden file deliberately.</li><li>Run the full test suite and review output.</li><li>Mark <code>tested = true</code> only after every applicable fixture passes.</li></ol>
+<div class="tip"><strong>Design check:</strong> a new language should not bypass the safety rules. It must not install tools, run fixers, or infer commands merely because a package happens to be installed.</div>
+
+<h2>20. Practical troubleshooting recipes</h2>
+<h3>“Why did nothing run?”</h3><p>Run <code>--dry-run</code>. Check whether a supported build file exists, whether the directory is ignored, and whether the project actually defines the relevant script/configuration.</p>
+<h3>“Why is Lint WARN?”</h3><p>The project may have no linter configuration, or the configured executable may be missing. This is intentionally not a code failure.</p>
+<h3>“Why are Tests SKIP?”</h3><p>Look for a preceding Build or Lint failure, an omitted stage, no detected test command, or <code>no_tests_found</code>.</p>
+<h3>“Why is Coverage missing?”</h3><p>Check that the coverage command ran, its report was written during this run, the report format is supported, and the output did not only contain an unrecognized percentage format.</p>
+<h3>“Why did the tool not run eslint/ruff?”</h3><p>Being listed as a dependency is not enough. The project must declare it with a script or recognized configuration.</p>
+<h3>“Why does the report say WARN instead of FAIL?”</h3><p>Missing tools and dependencies are setup problems. The tool reserves FAIL for command failures and the explicit no-tests coverage rule.</p>
+
+<h2>21. Study exercises</h2>
+<div class="quiz"><p><strong>Exercise 1:</strong> A JavaScript project has <code>lint:fix</code>, <code>test</code>, and <code>build</code> scripts. Which scripts are eligible?</p><details><summary>Answer</summary><p><code>test</code> and <code>build</code>. <code>lint:fix</code> is skipped because its name indicates a fixer.</p></details></div>
+<div class="quiz"><p><strong>Exercise 2:</strong> Build returns a dependency-resolution error. Does the build gate block later stages?</p><details><summary>Answer</summary><p>The result becomes a dependency warning when it matches the language's dependency patterns, so it is not treated as a code failure and does not activate the build gate.</p></details></div>
+<div class="quiz"><p><strong>Exercise 3:</strong> Lint fails, but Tests is explicitly requested. Does Tests run?</p><details><summary>Answer</summary><p>No. A Lint FAIL or TIMEOUT activates the lint gate and Tests/Coverage are skipped.</p></details></div>
+<div class="quiz"><p><strong>Exercise 4:</strong> A repository has an old coverage XML with 95%, but the new coverage command writes no file. What happens?</p><details><summary>Answer</summary><p>The old file is ignored as stale. The tool may parse a percentage from fresh output; otherwise Coverage is WARN coverage_missing.</p></details></div>
+<div class="quiz"><p><strong>Exercise 5:</strong> What is the difference between Supported and Tested?</p><details><summary>Answer</summary><p>Supported means a rulebook entry exists. Tested means the applicable fixture set has been verified with expected results and real tools.</p></details></div>
+<div class="quiz"><p><strong>Exercise 6:</strong> A team wants coverage below 80% to fail. Does v1 support this?</p><details><summary>Answer</summary><p>No. Coverage thresholds are intentionally out of scope and require a future specification decision.</p></details></div>
+
+<h2>22. Final mastery checklist</h2>
+<ul class="checklist"><li>I can preview commands with <code>--dry-run</code>.</li><li>I understand that project scripts are trusted code, not harmless metadata.</li><li>I can explain the Build, Lint, Tests, and Coverage gates.</li><li>I can distinguish FAIL, WARN, SKIP, TIMEOUT, and INTR.</li><li>I know where the terminal result, JSON report, and full logs are found.</li><li>I know why installed tools are not automatically run.</li><li>I can explain fresh coverage and the no-tests rule.</li><li>I can name at least three handled edge cases.</li><li>I can name at least three known gaps.</li><li>I can describe the role of <code>languages.toml</code>.</li><li>I can add a language fixture without weakening the safety model.</li></ul>
+
+<h2>23. One-page mental model</h2>
+<pre><code>Trust the repository?        If no: do not run it. If unsure: dry-run first.
+What is the input?           A folder, not a zip, URL, or single file.
+What is discovered?          Supported build files become independent projects.
+What gets executed?          Only project-defined, non-risky commands.
+What is the order?           Build -> Lint -> Tests -> Coverage.
+What blocks what?             Build failure blocks all; lint failure blocks later;
+                              test failure blocks coverage.
+What is honest evidence?      WARN is not PASS; SKIP is not PASS; no tests fail coverage.
+What is produced?             Human table + masked bounded JSON + full logs.
+What is not in v1?            Sandbox, installs, parallelism, thresholds, CI,
+                              changed-files mode, and structured findings.</code></pre>
+<p class="small">This guide is intentionally self-contained. It is based on the SAT project's README, SPEC, CONTEXT, implementation structure, and handover notes as provided in the workspace.</p>
+</main></body></html>

@@ -1,0 +1,5 @@
+
+> test
+> node -e "console.log('frontend tests')"
+
+frontend tests

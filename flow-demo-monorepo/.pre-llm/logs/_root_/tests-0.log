@@ -1,0 +1,5 @@
+
+> test
+> node -e "console.log('root tests')"
+
+root tests

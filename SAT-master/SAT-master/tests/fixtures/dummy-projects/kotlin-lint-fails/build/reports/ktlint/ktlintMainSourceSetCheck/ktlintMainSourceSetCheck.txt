@@ -1,0 +1,6 @@
+[90m/Users/samy/AI-projects/pwc/dummy-projects/kotlin-gradle-kts/src/main/kotlin/[0mCalc.kt[90m:[0m3[90m:9:[0m Newline expected after opening parenthesis [90m(standard:function-signature)[0m
+[90m/Users/samy/AI-projects/pwc/dummy-projects/kotlin-gradle-kts/src/main/kotlin/[0mCalc.kt[90m:[0m3[90m:17:[0m Parameter should start on a newline [90m(standard:function-signature)[0m
+[90m/Users/samy/AI-projects/pwc/dummy-projects/kotlin-gradle-kts/src/main/kotlin/[0mCalc.kt[90m:[0m3[90m:23:[0m Newline expected before closing parenthesis [90m(standard:function-signature)[0m
+
+Summary error count (descending) by rule:
+  standard:function-signature: 3

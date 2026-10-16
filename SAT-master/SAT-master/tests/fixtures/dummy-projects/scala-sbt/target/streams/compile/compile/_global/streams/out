@@ -1,0 +1,6 @@
+[info] scoverage excludedSymbols: List(scala.reflect.api.Exprs.Expr, scala.reflect.api.Trees.Tree, scala.reflect.macros.Universe.Tree)
+[info] Cleaning datadir [/Users/samy/AI-projects/pwc/dummy-projects/scala-sbt/target/scala-2.13/scoverage-data]
+[info] Beginning coverage instrumentation
+[info] Instrumentation completed [2 statements]
+[info] Wrote instrumentation file [/Users/samy/AI-projects/pwc/dummy-projects/scala-sbt/target/scala-2.13/scoverage-data/scoverage.coverage]
+[info] Will write measurement data to [/Users/samy/AI-projects/pwc/dummy-projects/scala-sbt/target/scala-2.13/scoverage-data]

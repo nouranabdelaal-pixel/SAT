@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/master.swiftdeps"
+  },
+  "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/Tests/SwiftPackageTests/AddTests.swift": {
+    "dependencies": "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/AddTests.d",
+    "object": "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/AddTests.swift.o",
+    "swiftmodule": "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/AddTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/AddTests.swiftdeps",
+    "diagnostics": "/Users/samy/AI-projects/pwc/dummy-projects/swift-test-fails/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/AddTests.dia"
+  }
+}

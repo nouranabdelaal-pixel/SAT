@@ -1,0 +1,104 @@
+# dir to run in	expected exit	what it exercises
+ts-passing	0	all four Gates PASS
+ts-test-fails	1	test Gate FAIL (npm test exit 1), Sidecar Log written
+ts-no-tests	1	Hard Gate: no test files is a FAIL even though everything else passes
+ts-tests-only-in-node_modules	1	test files inside node_modules do not count
+ts-no-eslint-config	0	lint SKIPPED: no ESLint config
+ts-lint-fails	1	lint Gate FAIL (eslint rule violated)
+ts-build-fails	1	build Gate FAIL (tsc error), other Gates still run
+ts-no-build-script	0	no "build" script: falls back to node_modules/.bin/tsc --noEmit
+ts-test-pattern-fallback	0	no test matches (unit|spec): retries without the pattern
+ts-low-coverage	1	coverage Gate FAIL (below the 80% default)
+ts-low-coverage-override	0	COVERAGE_THRESHOLD_TYPESCRIPT=10 turns the same project into a PASS
+ts-global-threshold-low	0	COVERAGE_THRESHOLD=10 does the same globally
+ts-verbose-conf	0	VERBOSE=true in .validation.conf
+python-passing	0	pytest -m unit, ruff and coverage all PASS; build SKIPPED
+python-requirements-only	0	requirements.txt alone is a Python signal
+python-test-fails	1	test Gate FAIL (pytest exit 1)
+python-no-tests	1	Hard Gate: no test files
+python-marker-fallback	0	no unit-marked tests: pytest exit 5 triggers the full-suite retry
+python-low-coverage	1	coverage Gate FAIL
+python-lint-fails	1	lint Gate FAIL (ruff F401)
+java-maven-no-tests	1	Hard Gate (no src/test), independent of installed tools
+scala-sbt-no-tests	1	Hard Gate, independent of installed tools
+go-no-tests	1	Hard Gate, independent of installed tools
+rust-no-tests	1	Hard Gate, independent of installed tools
+dotnet-no-tests	1	Hard Gate, independent of installed tools
+ruby-no-tests	1	Hard Gate, independent of installed tools
+php-no-tests	1	Hard Gate, independent of installed tools
+swift-no-tests	1	Hard Gate, independent of installed tools
+cpp-no-tests	1	Hard Gate, independent of installed tools
+elixir-no-tests	1	Hard Gate, independent of installed tools
+java-maven	0	Maven + JUnit 5 + JaCoCo + Checkstyle: all four Gates really run
+java-gradle	0	Gradle (no wrapper: system gradle) + JUnit 5 + JaCoCo + Checkstyle
+kotlin-gradle-kts	0	Kotlin via build.gradle.kts + kotlin.test + JaCoCo + ktlint
+kotlin-gradle-groovy	0	Kotlin via build.gradle (Groovy DSL) plus a .kt file, with JaCoCo and ktlint
+scala-sbt	0	sbt + ScalaTest + scalastyle + sbt-scoverage (statement coverage)
+go-module	0	Go: -short tests, coverprofile, go vet / golangci-lint
+go-test-fails	1	Go test failure
+rust-cargo	0	Rust with an in-file #[cfg(test)] module; coverage via cargo-llvm-cov
+rust-integration-tests-dir	1	Rust whose tests live only in tests/: cargo test --lib runs none, so coverage is 0% and FAILs (integration tests are out of scope by design)
+dotnet-csproj	0	.NET: one flat xUnit project (coverlet does not measure the test assembly, so coverage is SKIPPED)
+dotnet-sln-only	0	.NET: classic .sln at the root, library and xUnit test project in subdirectories
+dotnet-global-json	1	.NET: global.json alone is a signal but there is no project, so build fails
+ruby-gem	0	Ruby: RSpec + SimpleCov + RuboCop + a Rakefile build task
+ruby-no-rakefile-build	0	Ruby Minitest project without a Rakefile: build SKIPPED (no build command detected)
+php-composer	0	PHP: PHPUnit 11 + PHPStan via composer; coverage needs pcov (installed here)
+swift-package	0	Swift Package: XCTest, SwiftLint, coverage from the SwiftPM JSON
+cpp-cmake	0	C/C++ via CMakeLists.txt: cmake build, ctest, clang-tidy; coverage not implemented
+cpp-makefile	0	C/C++ via Makefile plus a .c file, with a `test` target
+elixir-mix	0	Elixir: ExUnit with mix test --cover, Credo
+monorepo-mixed	0	three Projects in subdirectories (TypeScript, Python, Go); docs/ ignored
+monorepo-one-fails	1	two Projects; a failure is attributed to its own Project only
+root-and-sub	0	a root TypeScript Project and a Python Project in tools/
+no-signals	2	nothing detected: script error
+too-deep	2	signal files two levels down are not scanned
+cpp-makefile-without-sources-undetected	2	a Makefile alone is not a C/C++ signal
+symlinked-subdir	0	link-ts (a symlink) is skipped; only real-ts is a Project
+hostile-subdir-name	0	subdirectory name with quotes, backslash, & and $()
+hostile-root-dir/we"ird 'dir' \ & $(x)	0	working directory name with quotes, backslash, & and $()
+ambiguous-ts-over-python	0	package.json beats pyproject.toml (TypeScript wins)
+ambiguous-java-over-go	0	pom.xml beats go.mod (Java wins); a real Maven project
+ambiguous-kotlin-over-java	0	build.gradle plus a .kt file is Kotlin, not Java; Gradle project without ktlint or JaCoCo, so lint and coverage are SKIPPED
+conf-comments-and-blank-lines	0	comments, blank lines and inline # comments in .validation.conf
+conf-non-numeric-threshold	2	COVERAGE_THRESHOLD=abc is a script error
+conf-threshold-over-100	2	COVERAGE_THRESHOLD=150 is a script error
+conf-bad-language-key	2	COVERAGE_THRESHOLD_TYPE-SCRIPT is an invalid key
+conf-injection-attempt	2	a shell command in a threshold value is rejected, not run
+python-flask	0	Flask app tested with the test client under pytest
+ts-vitest	0	Vitest (not Jest): own flags and coverage reporter
+ts-vitest-test-fails	1	Vitest test failure
+ts-vitest-low-coverage	1	Vitest coverage below the threshold
+go-low-coverage	1	Go coverage below the threshold
+rust-test-fails	1	Rust test failure
+rust-low-coverage	1	Rust coverage below the threshold
+rust-lint-fails	1	clippy -D warnings failure
+java-maven-test-fails	1	JUnit failure
+java-maven-low-coverage	1	JaCoCo coverage below the threshold
+java-maven-lint-fails	1	Checkstyle violation (unused import)
+kotlin-test-fails	1	kotlin.test failure
+kotlin-lint-fails	1	ktlint violation
+scala-test-fails	1	ScalaTest failure
+scala-low-coverage	1	scoverage below the threshold
+ruby-test-fails	1	RSpec failure
+ruby-lint-fails	1	RuboCop offences
+ruby-low-coverage	1	SimpleCov below the threshold
+ruby-minitest	0	Plain Minitest in test/, no RSpec
+php-test-fails	1	PHPUnit failure
+php-lint-fails	1	PHPStan error
+php-low-coverage	1	pcov coverage below the threshold
+elixir-test-fails	1	ExUnit failure
+elixir-low-coverage	1	mix test --cover below the threshold
+elixir-lint-fails	1	Credo issue (IO.inspect, missing moduledoc)
+swift-test-fails	1	XCTest failure
+swift-low-coverage	1	SwiftPM coverage below the threshold
+cpp-makefile-test-fails	1	make test fails
+cpp-cmake-test-fails	1	ctest fails
+dotnet-xunit	0	C# solution (.slnx) with a library and an xUnit project; coverlet Cobertura coverage
+dotnet-nunit	0	C# solution with an NUnit project
+dotnet-aspnet	0	ASP.NET Core minimal API tested through WebApplicationFactory
+dotnet-xunit-test-fails	1	xUnit failure
+dotnet-xunit-low-coverage	1	Cobertura coverage below the threshold
+dotnet-xunit-lint-fails	1	dotnet format --verify-no-changes reports formatting
+ts-mocha	0	Mocha with c8 (not Jest or Vitest): plain npm test, coverage from c8 table; lint SKIPPED
+ts-mocha-test-fails	1	Mocha test failure

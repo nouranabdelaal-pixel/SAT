@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/samy/AI-projects/pwc/dummy-projects/swift-no-tests/.build/arm64-apple-macosx/debug/X.build/master.swiftdeps"
+  },
+  "/Users/samy/AI-projects/pwc/dummy-projects/swift-no-tests/Sources/X/X.swift": {
+    "dependencies": "/Users/samy/AI-projects/pwc/dummy-projects/swift-no-tests/.build/arm64-apple-macosx/debug/X.build/X.d",
+    "object": "/Users/samy/AI-projects/pwc/dummy-projects/swift-no-tests/.build/arm64-apple-macosx/debug/X.build/X.swift.o",
+    "swiftmodule": "/Users/samy/AI-projects/pwc/dummy-projects/swift-no-tests/.build/arm64-apple-macosx/debug/X.build/X~partial.swiftmodule",
+    "swift-dependencies": "/Users/samy/AI-projects/pwc/dummy-projects/swift-no-tests/.build/arm64-apple-macosx/debug/X.build/X.swiftdeps",
+    "diagnostics": "/Users/samy/AI-projects/pwc/dummy-projects/swift-no-tests/.build/arm64-apple-macosx/debug/X.build/X.dia"
+  }
+}

@@ -1,0 +1,11 @@
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-nunit/Lib/bin/Debug/net10.0/Lib.deps.json
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-nunit/Lib/bin/Debug/net10.0/Lib.dll
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-nunit/Lib/bin/Debug/net10.0/Lib.pdb
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-nunit/Lib/obj/Debug/net10.0/Lib.GeneratedMSBuildEditorConfig.editorconfig
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-nunit/Lib/obj/Debug/net10.0/Lib.AssemblyInfoInputs.cache
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-nunit/Lib/obj/Debug/net10.0/Lib.AssemblyInfo.cs
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-nunit/Lib/obj/Debug/net10.0/Lib.csproj.CoreCompileInputs.cache
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-nunit/Lib/obj/Debug/net10.0/Lib.dll
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-nunit/Lib/obj/Debug/net10.0/refint/Lib.dll
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-nunit/Lib/obj/Debug/net10.0/Lib.pdb
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-nunit/Lib/obj/Debug/net10.0/ref/Lib.dll

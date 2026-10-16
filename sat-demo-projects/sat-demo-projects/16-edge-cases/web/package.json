@@ -1,0 +1,16 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node --check src/app.js",
+    "lint": "node lint.js",
+    "lint:fix": "node lint.js --fix",
+    "format": "node lint.js --write",
+    "test": "node --test",
+    "test:ci": "node --test",
+    "test:watch": "node --test --watch",
+    "coverage": "node --test --experimental-test-coverage",
+    "dev": "node src/app.js"
+  }
+}

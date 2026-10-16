@@ -1,0 +1,11 @@
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-no-tests/bin/Debug/net8.0/App.deps.json
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-no-tests/bin/Debug/net8.0/App.dll
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-no-tests/bin/Debug/net8.0/App.pdb
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-no-tests/obj/Debug/net8.0/App.GeneratedMSBuildEditorConfig.editorconfig
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-no-tests/obj/Debug/net8.0/App.AssemblyInfoInputs.cache
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-no-tests/obj/Debug/net8.0/App.AssemblyInfo.cs
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-no-tests/obj/Debug/net8.0/App.csproj.CoreCompileInputs.cache
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-no-tests/obj/Debug/net8.0/App.dll
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-no-tests/obj/Debug/net8.0/refint/App.dll
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-no-tests/obj/Debug/net8.0/App.pdb
+/Users/samy/AI-projects/pwc/dummy-projects/dotnet-no-tests/obj/Debug/net8.0/ref/App.dll
