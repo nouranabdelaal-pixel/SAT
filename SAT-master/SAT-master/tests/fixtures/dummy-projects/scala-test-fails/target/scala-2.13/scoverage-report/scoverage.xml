@@ -1,0 +1,30 @@
+<scoverage 
+statement-count="2" statements-invoked="0" statement-rate="0.00" branch-rate="0.00" version="1.0" timestamp="1791852674187">
+    <packages>
+        <package name="&lt;empty&gt;" statement-count="2" statements-invoked="0" statement-rate="0.00">
+            <classes>
+                <class 
+                name="App" filename="App.scala" statement-count="2" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="&lt;empty&gt;/App/twice" statement-count="1" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="&lt;empty&gt;" class="App" class-type="Object" full-class-name="App" source="/Users/samy/AI-projects/pwc/dummy-projects/scala-test-fails/src/main/scala/App.scala" method="twice" start="80" end="85" line="4" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="&lt;empty&gt;/App/add" statement-count="1" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="&lt;empty&gt;" class="App" class-type="Object" full-class-name="App" source="/Users/samy/AI-projects/pwc/dummy-projects/scala-test-fails/src/main/scala/App.scala" method="add" start="46" end="51" line="2" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+    </packages>
+</scoverage>

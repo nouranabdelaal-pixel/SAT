@@ -1,0 +1,54 @@
+# Coverage data, format version: 3.0
+# Statement data:
+# - id
+# - source path
+# - package name
+# - class name
+# - class type (Class, Object or Trait)
+# - full class name
+# - method name
+# - start offset
+# - end offset
+# - line number
+# - symbol name
+# - tree name
+# - is branch
+# - invocations count
+# - is ignored
+# - description (can be multi-line)
+# '' sign
+# ------------------------------------------
+1
+src/main/scala/App.scala
+<empty>
+App
+Object
+App
+add
+46
+51
+2
+scala.Int.+
+Apply
+false
+0
+false
+a.+(b)
+
+2
+src/main/scala/App.scala
+<empty>
+App
+Object
+App
+twice
+80
+85
+4
+scala.Int.*
+Apply
+false
+0
+false
+a.*(2)
+

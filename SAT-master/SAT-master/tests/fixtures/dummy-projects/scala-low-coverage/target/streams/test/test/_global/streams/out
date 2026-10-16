@@ -1,0 +1,10 @@
+[debug] Running TaskDef(AppSpec, org.scalatest.tools.Framework$$anon$1@33be5814, false, [SuiteSelector])
+[info] AppSpec:
+[info] - adds
+[info] Run completed in 194 milliseconds.
+[info] Total number of tests run: 1
+[info] Suites: completed 1, aborted 0
+[info] Tests: succeeded 1, failed 0, canceled 0, ignored 0, pending 0
+[info] All tests passed.
+[debug] Passed tests:
+[debug] 	AppSpec

@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/master.swiftdeps"
+  },
+  "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/Sources/SwiftPackage/Add.swift": {
+    "dependencies": "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/Add.d",
+    "object": "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/Add.swift.o",
+    "swiftmodule": "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/Add~partial.swiftmodule",
+    "swift-dependencies": "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/Add.swiftdeps",
+    "diagnostics": "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/Add.dia"
+  }
+}

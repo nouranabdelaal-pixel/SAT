@@ -1,0 +1,16 @@
+{
+  "name": "ts-no-build-script",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "coverageReporters": [
+      "text"
+    ]
+  }
+}

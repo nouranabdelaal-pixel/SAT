@@ -1,0 +1,6 @@
+namespace App;
+
+public static class Maths
+{
+    public static int Add(int a, int b) => a + b;
+}

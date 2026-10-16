@@ -1,0 +1,13 @@
+[info] scalastyle using config /Users/samy/AI-projects/pwc/dummy-projects/scala-low-coverage/scalastyle-config.xml
+[debug] Starting scalastyle
+[debug] start file /Users/samy/AI-projects/pwc/dummy-projects/scala-low-coverage/src/main/scala/App.scala
+[warn] /Users/samy/AI-projects/pwc/dummy-projects/scala-low-coverage/src/main/scala/App.scala:1: Header does not match expected text
+[warn] /Users/samy/AI-projects/pwc/dummy-projects/scala-low-coverage/src/main/scala/App.scala:7:15: Magic Number
+[debug] end file /Users/samy/AI-projects/pwc/dummy-projects/scala-low-coverage/src/main/scala/App.scala
+[info] scalastyle Processed 1 file(s)
+[info] scalastyle Found 0 errors
+[info] scalastyle Found 2 warnings
+[info] scalastyle Found 0 infos
+[info] scalastyle Finished in 1 ms
+[success] created output: /Users/samy/AI-projects/pwc/dummy-projects/scala-low-coverage/target
+[warn] warnings exist

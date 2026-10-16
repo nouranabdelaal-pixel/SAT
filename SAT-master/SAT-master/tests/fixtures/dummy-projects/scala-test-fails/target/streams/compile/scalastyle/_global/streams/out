@@ -1,0 +1,12 @@
+[info] scalastyle using config /Users/samy/AI-projects/pwc/dummy-projects/scala-test-fails/scalastyle-config.xml
+[debug] Starting scalastyle
+[debug] start file /Users/samy/AI-projects/pwc/dummy-projects/scala-test-fails/src/main/scala/App.scala
+[warn] /Users/samy/AI-projects/pwc/dummy-projects/scala-test-fails/src/main/scala/App.scala:1: Header does not match expected text
+[debug] end file /Users/samy/AI-projects/pwc/dummy-projects/scala-test-fails/src/main/scala/App.scala
+[info] scalastyle Processed 1 file(s)
+[info] scalastyle Found 0 errors
+[info] scalastyle Found 1 warnings
+[info] scalastyle Found 0 infos
+[info] scalastyle Finished in 3 ms
+[success] created output: /Users/samy/AI-projects/pwc/dummy-projects/scala-test-fails/target
+[warn] warnings exist

@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+project(CppCmake CXX)
+enable_testing()
+add_executable(add_test tests/add_test.cpp)
+add_test(NAME add COMMAND add_test)

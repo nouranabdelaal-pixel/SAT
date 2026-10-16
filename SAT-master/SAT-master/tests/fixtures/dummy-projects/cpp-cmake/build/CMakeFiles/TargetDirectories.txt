@@ -1,0 +1,4 @@
+/Users/samy/AI-projects/pwc/dummy-projects/cpp-cmake/build/CMakeFiles/add_test.dir
+/Users/samy/AI-projects/pwc/dummy-projects/cpp-cmake/build/CMakeFiles/test.dir
+/Users/samy/AI-projects/pwc/dummy-projects/cpp-cmake/build/CMakeFiles/edit_cache.dir
+/Users/samy/AI-projects/pwc/dummy-projects/cpp-cmake/build/CMakeFiles/rebuild_cache.dir

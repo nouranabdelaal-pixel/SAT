@@ -1,0 +1,18 @@
+Start testing: Oct 13 03:49 EEST
+----------------------------------------------------------
+1/1 Testing: add
+1/1 Test: add
+Command: "/Users/samy/AI-projects/pwc/dummy-projects/cpp-cmake/build/add_test"
+Directory: /Users/samy/AI-projects/pwc/dummy-projects/cpp-cmake/build
+"add" start time: Oct 13 03:49 EEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"add" end time: Oct 13 03:49 EEST
+"add" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 13 03:49 EEST

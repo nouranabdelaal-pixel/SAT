@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coverage line-rate="1" branch-rate="1" version="1.9" timestamp="1791850377" lines-covered="5" lines-valid="5" branches-covered="0" branches-valid="0">
+  <sources>
+    <source>/</source>
+  </sources>
+  <packages>
+    <package name="Api" line-rate="1" branch-rate="1" complexity="1">
+      <classes>
+        <class name="Program" filename="Users/samy/AI-projects/pwc/dummy-projects/dotnet-aspnet/Api/Program.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name="&lt;Main&gt;$" signature="(System.String[])" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="1" hits="1" branch="False" />
+                <line number="2" hits="1" branch="False" />
+                <line number="4" hits="2" branch="False" />
+                <line number="5" hits="2" branch="False" />
+                <line number="7" hits="1" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="1" hits="1" branch="False" />
+            <line number="2" hits="1" branch="False" />
+            <line number="4" hits="2" branch="False" />
+            <line number="5" hits="2" branch="False" />
+            <line number="7" hits="1" branch="False" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

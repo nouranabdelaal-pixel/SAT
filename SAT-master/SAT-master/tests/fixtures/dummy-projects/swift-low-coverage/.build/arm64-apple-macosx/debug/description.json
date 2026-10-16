@@ -1,0 +1,650 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.xctest/Contents/MacOS/SwiftPackagePackageTests",
+      "packagePath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage",
+      "productName" : "SwiftPackagePackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.SwiftPackage-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/sources",
+      "importPath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/Sources/SwiftPackage/Add.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "SwiftPackage",
+      "moduleOutputPath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/Modules/SwiftPackage.swiftmodule",
+      "objects" : [
+        "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/Add.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx10.13",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/include/SwiftPackage-Swift.h",
+        "-profile-coverage-mapping",
+        "-profile-generate",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "swift_low_coverage"
+      ],
+      "outputFileMapPath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/Add.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/Modules/SwiftPackage.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/Sources/SwiftPackage/Add.swift"
+      ],
+      "tempsPath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.SwiftPackagePackageTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/sources",
+      "importPath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/Modules/SwiftPackageTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "SwiftPackagePackageTests",
+      "moduleOutputPath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/Modules/SwiftPackagePackageTests.swiftmodule",
+      "objects" : [
+        "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx10.13",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/include/SwiftPackagePackageTests-Swift.h",
+        "-profile-coverage-mapping",
+        "-profile-generate",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "swift_low_coverage"
+      ],
+      "outputFileMapPath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/Modules/SwiftPackagePackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.SwiftPackageTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/sources",
+      "importPath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/Tests/SwiftPackageTests/AddTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/Modules/SwiftPackage.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "SwiftPackageTests",
+      "moduleOutputPath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/Modules/SwiftPackageTests.swiftmodule",
+      "objects" : [
+        "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/AddTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-profile-coverage-mapping",
+        "-profile-generate",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "swift_low_coverage"
+      ],
+      "outputFileMapPath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/AddTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/Modules/SwiftPackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/Tests/SwiftPackageTests/AddTests.swift"
+      ],
+      "tempsPath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackageTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "SwiftPackage" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "SwiftPackage",
+      "-package-name",
+      "swift_low_coverage",
+      "-c",
+      "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/Sources/SwiftPackage/Add.swift",
+      "-I",
+      "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx10.13",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/include/SwiftPackage-Swift.h",
+      "-profile-coverage-mapping",
+      "-profile-generate",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "swift_low_coverage",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "SwiftPackagePackageTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "SwiftPackagePackageTests",
+      "-package-name",
+      "swift_low_coverage",
+      "-c",
+      "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.derived/runner.swift",
+      "-I",
+      "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx10.13",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/include/SwiftPackagePackageTests-Swift.h",
+      "-profile-coverage-mapping",
+      "-profile-generate",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "swift_low_coverage",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "SwiftPackageTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "SwiftPackageTests",
+      "-package-name",
+      "swift_low_coverage",
+      "-c",
+      "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/Tests/SwiftPackageTests/AddTests.swift",
+      "-I",
+      "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-profile-coverage-mapping",
+      "-profile-generate",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "swift_low_coverage",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "SwiftPackage" : [
+
+    ],
+    "SwiftPackagePackageTests" : [
+      "SwiftPackageTests",
+      "SwiftPackage"
+    ],
+    "SwiftPackageTests" : [
+      "SwiftPackage"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+    "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.derived/runner.swift" : {
+      "inputs" : [
+
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/Sources/SwiftPackage/Add.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/sources"
+    },
+    "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/sources"
+    },
+    "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackage.build/Add.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/AddTests.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackagePackageTests.product/Objects.LinkFileList"
+    },
+    "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/Tests/SwiftPackageTests/AddTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/SwiftPackageTests.build/sources"
+    },
+    "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/samy/AI-projects/pwc/dummy-projects/swift-low-coverage/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}
